@@ -25,7 +25,7 @@ interface Item {
 const GridEditor = () => {
   const [rows, setRows] = useState(3);
   const [cols, setCols] = useState(3);
-  const [gap, setGap] = useState(2);
+  const [gap, setGap] = useState(1);
   const [items, setItems] = useState<Item[]>([]);
   const codeContainerRef = useRef<HTMLPreElement>(null);
   const notify = () => toast('Code Copied to Clipboard!');
