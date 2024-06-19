@@ -16,6 +16,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import ReactGridLayout from './React-grid-layout';
+import ExampleGrid from './React-grid-layout';
 
 interface Item {
   id: string;
@@ -29,6 +31,12 @@ const GridEditor = () => {
   const [gap, setGap] = useState(1);
   const [items, setItems] = useState<Item[]>([]);
   const codeContainerRef = useRef<HTMLPreElement>(null);
+
+  const initialLayout = [
+    { i: 'a', x: 0, y: 0, w: 1, h: 2 },
+    { i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
+    { i: 'c', x: 4, y: 0, w: 1, h: 2 }
+  ];
 
   const handleDrop = (id: string, position: string) => {
     setItems((prevItems) =>
@@ -128,7 +136,6 @@ const GridEditor = () => {
         </CardContent>
       </Card>
 
-      
       
     </div>
   );

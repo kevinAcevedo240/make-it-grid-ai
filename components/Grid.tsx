@@ -1,5 +1,8 @@
 import React from 'react';
-import {TrashIcon } from "@radix-ui/react-icons" // Importar el ícono de X
+import {TrashIcon } from "@radix-ui/react-icons" 
+import GridLayout, { Layout } from 'react-grid-layout';
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
 
 type GridProps = {
   rows: number;

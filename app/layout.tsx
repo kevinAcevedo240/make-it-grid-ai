@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import Footer from "@/components/footer";
+import { ModeToggle } from "@/components/ui/theme-toggle";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,8 +27,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <Footer/>
+          <div className="container mx-auto p-4 mt-2">
+            <div className="flex justify-between">
+              <h1 className="text-2xl font-bold mb-4">MakeItGrid AI</h1>
+              <ModeToggle />
+            </div>
+            {children}
+            <Footer />
+          </div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

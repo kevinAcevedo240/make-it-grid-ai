@@ -1,8 +1,5 @@
-interface Item {
-  id: string;
-  position: string;
-  size: { width: number; height: number };
-}
+import { Item } from "@/types";
+
 
 export const generateTailwindCode = (rows: number, cols: number, gap: number, items: Item[]): string => {
   const itemPositions = items.map(item => {

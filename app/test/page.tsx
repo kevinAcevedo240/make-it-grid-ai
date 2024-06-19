@@ -9,8 +9,8 @@ import { Toaster } from "react-hot-toast";
 export default function Home() {
   return (
     <>
-      <GridEditor />
-      {/* <ExampleGrid/> */}
+      {/* <GridEditor /> */}
+      <ExampleGrid />
       {/* <GridExample/> */}
     </>
   );

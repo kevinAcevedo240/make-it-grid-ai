@@ -11,7 +11,7 @@ const Footer = () => {
 
         <a
           href="https://www.linkedin.com/in/kevin-julian-acevedo-salazar/"
-          className="hover:underline"
+          
         >
           Made by <span className="underline">Kevin Acevedo</span>
         </a>
