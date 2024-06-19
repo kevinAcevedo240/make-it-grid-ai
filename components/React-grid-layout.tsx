@@ -35,7 +35,21 @@ const ExampleGrid = () => {
             w: 1,
             h: 1
         };
-        setLayout([...layout, newItem]);
+        
+        // Verificar si hay un item en la posición (x, y)
+        const exists = layout.some(item => item.x === x && item.y === y);
+        
+        if (!exists) {
+            setLayout([...layout, newItem]);
+        } else {
+            const updatedLayout = layout.map(item => {
+                if (item.y >= y) {
+                    return { ...item, y: item.y + 1 };
+                }
+                return item;
+            });
+            setLayout([...updatedLayout, newItem]);
+        }
     };
 
     const handleDeleteItem = (id: string) => {
@@ -65,8 +79,8 @@ const ExampleGrid = () => {
                 rows={rows}
                 cols={cols}
                 gap={gap}
-                setRows={setRows}
-                setCols={setCols}
+                setRows={(value) => setRows(Math.max(0, value))} // Permitir rows a partir de 0
+                setCols={(value) => setCols(Math.max(1, value))} // Permitir cols a partir de 0
                 setGap={setGap}
             />
             <div className="flex my-6 gap-4">
@@ -78,49 +92,50 @@ const ExampleGrid = () => {
                 </Button>
             </div>
             <div className="relative w-full" style={{ paddingBottom: `calc(${rows} * 100px + ${gap * 4 * (rows - 1)}px + 1rem)` }}>
-                <div
-                    className="grid w-full absolute"
-                    style={{
-                        gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-                        gridTemplateRows: `repeat(${rows}, minmax(100px, 1fr))`,
-                        gap: `${gap * 4}px`, // Tailwind uses 0.5rem as 1 gap unit, 8px = 0.5rem
-                        padding: `${gap * 4}px 0`, // Apply gap padding only vertically
-                    }}
-                >
-                    {Array.from({ length: rows * cols }).map((_, index) => {
-                        const x = index % cols;
-                        const y = Math.floor(index / cols);
-                        return (
-                            <div
-                                key={index}
-                                onClick={() => handleAddItem(x, y)}
-                                className="relative border dark:border-gray-100 transition-all duration-300 hover:bg-secondary/30 rounded-lg h-full flex items-center justify-center z-0"
-                                style={{ zIndex: 1 }}
-                            >
-                                {/* Botón para agregar ítem */}
-                                <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white rounded-full size-6 sm:size-8 flex items-center justify-center cursor-pointer z-1">
-                                    <span className="text-xl sm:text-2xl">+</span>
-                                </button>
-                            </div>
-                        );
-                    })}
-                </div>
+                {cols > 0 && rows > 0 && (
+                    <div
+                        className="grid w-full absolute"
+                        style={{
+                            gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+                            gridTemplateRows: `repeat(${rows}, minmax(100px, 1fr))`,
+                            gap: `${gap * 4}px`,
+                            padding: `${gap * 4}px 0`,
+                        }}
+                    >
+                        {Array.from({ length: rows * cols }).map((_, index) => {
+                            const x = index % cols;
+                            const y = Math.floor(index / cols);
+                            return (
+                                <div
+                                    key={index}
+                                    onClick={() => handleAddItem(x, y)}
+                                    className="relative border dark:border-gray-100 transition-all duration-300 hover:bg-secondary/30 rounded-lg h-full flex items-center justify-center z-0"
+                                    style={{ zIndex: 1 }}
+                                >
+                                    {/* Botón para agregar ítem */}
+                                    <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white rounded-full size-6 sm:size-8 flex items-center justify-center cursor-pointer z-1">
+                                        <span className="text-xl sm:text-2xl">+</span>
+                                    </button>
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
                 <ResponsiveGridLayout
                     className="pt-[8px]"
                     layouts={{ lg: layout }}
                     breakpoints={breakpoints}
                     cols={colsResponsive}
                     rowHeight={100}
-                    //  rowHeight={(window.innerHeight - gap * 4 * (rows - 1)) / rows}
-                    margin={[gap * 4, gap * 4]} // Ajuste del margin basado en el gap
-                    containerPadding={[0, 0]} // No padding on the container
+                    margin={[gap * 4, gap * 4]}
+                    containerPadding={[0, 0]}
                     isDraggable={true}
                     isResizable={true}
                 >
                     {layout.map((item) => (
                         <div
                             key={item.i}
-                            className="relative  text-white bg-primary border border-white rounded-lg p-3 shadow-lg z-10"
+                            className="relative text-white bg-primary border border-white rounded-lg p-3 shadow-lg z-10"
                         >
                             <button
                                 className="absolute top-0 right-0 m-1 p-1 bg-muted/80 text-white rounded-full size-6 flex items-center justify-center cursor-pointer z-20"
