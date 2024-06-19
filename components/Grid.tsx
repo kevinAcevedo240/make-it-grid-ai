@@ -1,4 +1,5 @@
 import React from 'react';
+import {TrashIcon } from "@radix-ui/react-icons" // Importar el ícono de X
 
 type GridProps = {
   rows: number;
@@ -7,12 +8,23 @@ type GridProps = {
   items: any[];
   onDrop: (id: string, position: string) => void;
   onResize: (id: string, size: { width: number; height: number }) => void;
+  onAddItem: (position: string) => void; // Nueva función para agregar ítems
+  onDeleteItem: (id: string) => void; // Nueva función para eliminar ítems
 };
 
-const Grid = ({ rows, cols, gap, items, onDrop, onResize }: GridProps) => {
+const Grid = ({
+  rows,
+  cols,
+  gap,
+  items,
+  onDrop,
+  onResize,
+  onAddItem,
+  onDeleteItem,
+}: GridProps) => {
   const handleDrop = (e: React.DragEvent<HTMLDivElement>, position: string) => {
     e.preventDefault();
-    const id = e.dataTransfer.getData("text");
+    const id = e.dataTransfer.getData('text');
     onDrop(id, position);
   };
 
@@ -28,23 +40,43 @@ const Grid = ({ rows, cols, gap, items, onDrop, onResize }: GridProps) => {
             onDrop={(e) => handleDrop(e, position)}
             onDragOver={(e) => e.preventDefault()}
             className="border border-gray-300 relative rounded-lg"
-            style={{ minWidth: '100px', minHeight: '100px' }}
+            style={{ minWidth: '100px', minHeight: '100px', position: 'relative' }}
           >
-            {items.filter(item => item.position === position).map(item => (
-              <div
-                key={item.id}
-                className="p-2 bg-primary text-white absolute rounded-lg w-full h-full"
-                // style={{ width: item.size.width, height: item.size.height }}
-                draggable
-                onDragStart={(e) => e.dataTransfer.setData("text", item.id)}
-              >
-                {item.id}
+            {/* Botón para agregar ítem */}
+            <button
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white rounded-full size-6 sm:size-8 flex items-center justify-center cursor-pointer"
+              onClick={() => onAddItem(position)}
+            >
+              <span className='text-xl sm:text-2xl'>+</span>
+            </button>
+
+            {/* Renderizar ítems en la celda */}
+            {items
+              .filter((item) => item.position === position)
+              .map((item) => (
                 <div
-                  className="resize-handle"
-                  onMouseDown={(e) => handleResizeStart(e, item.id)}
-                />
-              </div>
-            ))}
+                  key={item.id}
+                  className="p-2 bg-primary text-white border-white border absolute rounded-lg w-full h-full"
+                  draggable
+                  onDragStart={(e) => e.dataTransfer.setData('text', item.id)}
+                  // style={{ width: item.size.width, height: item.size.height }}
+                >
+                  {item.id}
+                  {/* Botón para eliminar ítem */}
+                  <button
+                    className="absolute top-0 right-0 m-1 p-1 bg-muted/80 text-white rounded-full size-6 flex items-center justify-center cursor-pointer"
+                    onClick={() => onDeleteItem(item.id)}
+                  >
+                    <TrashIcon className="size-4 text-destructive" />
+                  </button>
+
+                  {/* Handle para redimensionar (puedes mantener esto si lo necesitas) */}
+                  <div
+                    className="resize-handle"
+                    onMouseDown={(e) => handleResizeStart(e, item.id)}
+                  />
+                </div>
+              ))}
           </div>
         );
       }
@@ -56,7 +88,7 @@ const Grid = ({ rows, cols, gap, items, onDrop, onResize }: GridProps) => {
     e.stopPropagation();
     const startX = e.clientX;
     const startY = e.clientY;
-    const item = items.find(item => item.id === id);
+    const item = items.find((item) => item.id === id);
 
     const handleMouseMove = (moveEvent: MouseEvent) => {
       const newWidth = item.size.width + (moveEvent.clientX - startX);

@@ -1,4 +1,5 @@
-'use client';
+
+'use client'
 
 import React, { useState, useRef } from 'react';
 import Grid from '../components/Grid';
@@ -7,7 +8,7 @@ import { generateTailwindCode } from '../utils/GenerateTailwindCode';
 import { Button } from "@/components/ui/button"
 import { Label } from './ui/label';
 import { CopyIcon } from "@radix-ui/react-icons"
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import {
   Card,
@@ -28,7 +29,6 @@ const GridEditor = () => {
   const [gap, setGap] = useState(1);
   const [items, setItems] = useState<Item[]>([]);
   const codeContainerRef = useRef<HTMLPreElement>(null);
-  const notify = () => toast('Code Copied to Clipboard!');
 
   const handleDrop = (id: string, position: string) => {
     setItems((prevItems) =>
@@ -46,13 +46,23 @@ const GridEditor = () => {
     );
   };
 
-  const handleAddItem = () => {
+  const handleAddItem = (position: string) => {
     const newItem: Item = {
       id: String(items.length + 1),
-      position: '0-0',
+      position,
       size: { width: 100, height: 100 },
     };
     setItems([...items, newItem]);
+  };
+
+  const handleDeleteItem = (id: string) => {
+    setItems((prevItems) =>
+      prevItems.filter((item) => item.id !== id)
+    );
+  };
+
+  const handleResetGrid = () => {
+    setItems([]);
   };
 
   const handleCopyToClipboard = () => {
@@ -62,7 +72,6 @@ const GridEditor = () => {
         .then(() => toast.success('Code Copied to Clipboard!'))
         .catch((err) => console.error('Failed to copy:', err));
     }
-    
   };
 
   return (
@@ -76,20 +85,22 @@ const GridEditor = () => {
         setGap={setGap}
       />
       <div className="flex my-6 gap-4">
-        <Button onClick={handleAddItem} className="p-2">
-          + Add Item
+        <Button onClick={handleResetGrid} className="p-2 border-primary border dark:bg-primary/0">
+          Reset Grid
         </Button>
       </div>
 
       <div className=' overflow-x-auto'>
-      <Grid
-        rows={rows}
-        cols={cols}
-        gap={gap}
-        items={items}
-        onDrop={handleDrop}
-        onResize={handleResize}
-      />
+        <Grid
+          rows={rows}
+          cols={cols}
+          gap={gap}
+          items={items}
+          onDrop={handleDrop}
+          onResize={handleResize}
+          onAddItem={handleAddItem}
+          onDeleteItem={handleDeleteItem}
+        />
       </div>
       <Card className="mt-6">
         <CardHeader>
@@ -116,6 +127,9 @@ const GridEditor = () => {
           </div>
         </CardContent>
       </Card>
+
+      
+      
     </div>
   );
 };

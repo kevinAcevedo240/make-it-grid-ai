@@ -21,6 +21,8 @@ const GridSettings: React.FC<GridSettingsProps> = ({ rows, cols, gap, setRows, s
       <Input
         id="rows"
         type="number"
+        min={0}
+        max={12}
         value={rows}
         onChange={(e) => setRows(parseInt(e.target.value, 10))}
         className="ml-2 p-1 border text-center text-lg"
@@ -33,6 +35,8 @@ const GridSettings: React.FC<GridSettingsProps> = ({ rows, cols, gap, setRows, s
       <Input
         id="cols"
         type="number"
+        min={0}
+        max={12}
         value={cols}
         onChange={(e) => setCols(parseInt(e.target.value, 10))}
         className="ml-2 p-1 border text-center text-lg"
@@ -45,6 +49,8 @@ const GridSettings: React.FC<GridSettingsProps> = ({ rows, cols, gap, setRows, s
       <Input
         id="gap"
         type="number"
+        min={0}
+        max={12}
         value={gap}
         onChange={(e) => setGap(parseInt(e.target.value, 10))}
         className="ml-2 p-1 border text-center text-lg"
