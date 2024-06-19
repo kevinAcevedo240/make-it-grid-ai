@@ -105,9 +105,9 @@ const GridEditor = () => {
       <Card className="mt-6">
         <CardHeader>
           <CardTitle>
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <h2 className='text-xl sm:text-2xl'>Generated Tailwind Code</h2>
-              <Button onClick={handleCopyToClipboard} className="p-2">
+              <Button onClick={handleCopyToClipboard} className="p-2 dark:border dark:border-primary dark:bg-primary/0">
                 <CopyIcon className='size-4'/>
               </Button>
             </div>
