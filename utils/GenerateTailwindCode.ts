@@ -18,55 +18,49 @@ export const generateTailwindCode = (rows: number, cols: number, gap: number, la
   `;
 };
 
-export const generateHtmlCode = (rows: number, cols: number, gap: number, layout: Layout[]): string => {
-  const itemPositions = layout.map(item => {
-    const colStart = item.x + 1;
-    const rowStart = item.y + 1;
-    const colSpan = item.w > 1 ? ` col-span-${item.w}` : '';
-    const rowSpan = item.h > 1 ? ` row-span-${item.h}` : '';
-
-    return `
-    <div class="col-start-${colStart} row-start-${rowStart}${colSpan}${rowSpan}">${item.i}</div>`;
-  }).join('');
+export const generateHtmlCode = ( layout: Layout[]): string => {
+  const itemPositions = layout.map((item, index) => 
+  `<div class="item item-${index + 1}">${item.i}</div>
+  `).join('  ');
 
   return `
-  <div class="grid grid-cols-${cols} grid-rows-${rows} gap-${gap}">
+  <div class="grid">
+
     ${itemPositions}
   </div>
   `;
 };
 
 export const generateCssCode = (rows: number, cols: number, gap: number, layout: Layout[]): string => {
-  const css = `
+  const baseStyles = `
   .grid {
     display: grid;
     grid-template-columns: repeat(${cols}, 1fr);
     grid-template-rows: repeat(${rows}, 1fr);
-    gap: ${gap}rem;
+    gap: ${gap * 4}px;
+  }
+  .item {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
   }
   `;
 
-  const itemPositions = layout.map(item => {
+  const itemStyles = layout.map((item, index) => {
     const colStart = item.x + 1;
     const rowStart = item.y + 1;
-    const colSpan = item.w > 1 ? ` span ${item.w}` : ' span 1';
-    const rowSpan = item.h > 1 ? ` span ${item.h}` : ' span 1';
+    const colSpan = item.w > 1 ? ` / span ${item.w}` : '';
+    const rowSpan = item.h > 1 ? ` / span ${item.h}` : '';
 
     return `
-    .col-start-${colStart} {
-      grid-column-start: ${colStart};
-    }
-    .row-start-${rowStart} {
-      grid-row-start: ${rowStart};
-    }
-    .col-span-${item.w} {
-      grid-column: ${colStart} / ${colStart + item.w};
-    }
-    .row-span-${item.h} {
-      grid-row: ${rowStart} / ${rowStart + item.h};
+    .item-${index + 1} {
+      grid-column: ${colStart}${colSpan};
+      grid-row: ${rowStart}${rowSpan};
     }
     `;
   }).join('');
 
-  return css + itemPositions;
+  return baseStyles + itemStyles;
 };

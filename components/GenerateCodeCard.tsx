@@ -30,7 +30,7 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
                 codeToCopy = codeContainerRef.current.innerText.trim();
             }
         } else if (activeTab === 'html') {
-            const htmlCode = generateHtmlCode(rows, cols, gap, layout);
+            const htmlCode = generateHtmlCode( layout);
             const cssCode = generateCssCode(rows, cols, gap, layout);
             codeToCopy = `<! -- HTML CODE -->\n\n${htmlCode}\n\n<! -- CSS CODE -->\n\n${cssCode}`;
         }
@@ -47,7 +47,7 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
         <CardHeader>
           <CardTitle>
             <div className="flex justify-between items-center">
-              <h2 className="text-xl sm:text-2xl">Generated Tailwind Code</h2>
+              <h2 className="text-2xl">Generated Code</h2>
               <Button
                 onClick={handleCopyToClipboard}
                 className="p-2 dark:border dark:border-primary dark:bg-primary/0"
@@ -79,7 +79,7 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
                       ref={codeContainerRef}
                       className="border rounded-lg p-2 overflow-x-auto max-h-64 overflow-y-auto"
                     >
-                      {generateHtmlCode(rows, cols, gap, layout)}
+                      {generateHtmlCode(layout)}
                     </pre>
                     <pre
                       ref={codeContainerRef}
