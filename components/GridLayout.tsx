@@ -68,7 +68,7 @@ const GridLayout = () => {
               Reset Grid
             </Button>
             <div>
-              <div className=" absolute left-[55%] md:left-[18%] xl:left-[20%] 2xl:left-[24%] top-44 md:top-32  text-sm lg:flex flex-col items-center animate-opacity">
+              <div className=" absolute left-[57%] md:left-[18%] xl:left-[20%] 2xl:left-[24%] top-44 md:top-32  text-sm lg:flex flex-col items-center animate-opacity">
                 <i className="text-muted-foreground text-xs md:text-sm pl-4 ">
                 Do you want a <br/> crazy grid layout?
                 </i>
@@ -81,7 +81,7 @@ const GridLayout = () => {
                   stroke-width="1"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  className="lucide lucide-undo size-12 md:size-16 text-muted-foreground transform scale-y-[-1] md:-rotate-[35deg]"
+                  className="lucide lucide-undo size-12 md:size-16 -ml-4 md:ml-0 text-muted-foreground transform scale-y-[-1] md:-rotate-[35deg]"
                   // style={{ transform: 'scaleY(-1) rotate(35deg)' }}
                 >
                   <path d="M3 7v6h6" />
