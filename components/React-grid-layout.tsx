@@ -80,7 +80,7 @@ const ExampleGrid = () => {
                 cols={cols}
                 gap={gap}
                 setRows={(value) => setRows(Math.max(0, value))} // Permitir rows a partir de 0
-                setCols={(value) => setCols(Math.max(1, value))} // Permitir cols a partir de 0
+                setCols={(value) => setCols(Math.max(0, value))} // Permitir cols a partir de 0
                 setGap={setGap}
             />
             <div className="flex my-6 gap-4">
@@ -106,23 +106,24 @@ const ExampleGrid = () => {
                             const x = index % cols;
                             const y = Math.floor(index / cols);
                             return (
-                                <div
-                                    key={index}
-                                    onClick={() => handleAddItem(x, y)}
-                                    className="relative border dark:border-gray-100 transition-all duration-300 hover:bg-secondary/30 rounded-lg h-full flex items-center justify-center z-0"
-                                    style={{ zIndex: 1 }}
-                                >
-                                    {/* Botón para agregar ítem */}
-                                    <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white rounded-full size-6 sm:size-8 flex items-center justify-center cursor-pointer z-1">
-                                        <span className="text-xl sm:text-2xl">+</span>
-                                    </button>
-                                </div>
+                              <div
+                                key={index}
+                                onClick={() => handleAddItem(x, y)}
+                                className="relative border dark:border-gray-100 transition-all duration-300 hover:bg-secondary/30 rounded-lg h-full flex items-center justify-center z-0"
+                                style={{ zIndex: 1 }}
+                              >
+                                {/* Botón para agregar ítem */}
+                                <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white rounded-full size-6 sm:size-8 flex items-center justify-center cursor-pointer z-1">
+                                  <span className="text-xl sm:text-2xl">+</span>
+                                </button>
+                              </div>
                             );
                         })}
                     </div>
                 )}
                 <ResponsiveGridLayout
-                    className="pt-[8px]"
+                    
+                    style={{paddingTop: `${gap * 4}px`} }
                     layouts={{ lg: layout }}
                     breakpoints={breakpoints}
                     cols={colsResponsive}
