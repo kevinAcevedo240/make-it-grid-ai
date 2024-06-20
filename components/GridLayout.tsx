@@ -26,7 +26,13 @@ const GridLayout = () => {
     };
 
     const breakpoints = { lg: 1200, md: 960, sm: 720, xs: 480, xxs: 0 };
-    const colsResponsive = { lg: cols, md: cols, sm: cols, xs: cols, xxs: cols };
+    const colsResponsive = { 
+        lg: Math.max(cols, 1), 
+        md: Math.max(cols, 1), 
+        sm: Math.max(cols, 1), 
+        xs: Math.max(cols, 1), 
+        xxs: Math.max(cols, 1) 
+    };
 
     return (
       <div className="mt-8">
@@ -35,7 +41,7 @@ const GridLayout = () => {
           cols={cols}
           gap={gap}
           setRows={(value) => setRows(Math.max(0, value))}
-          setCols={(value) => setCols(Math.max(1, value))}
+          setCols={(value) => setCols(Math.max(0, value))}
           setGap={setGap}
         />
         <div className="flex my-6 gap-4">
@@ -82,47 +88,48 @@ const GridLayout = () => {
               })}
             </div>
           )}
-          <ResponsiveGridLayout
-            style={{ paddingTop: `${gap * 4}px` }}
-            layouts={{ lg: layout }}
-            breakpoints={breakpoints}
-            cols={colsResponsive}
-            useCSSTransforms={true}
-            rowHeight={100}
-            margin={[gap * 4, gap * 4]}
-            compactType={null}
-            containerPadding={[0, 0]}
-            isDraggable={true}
-            isResizable={true}
-            onLayoutChange={(layout) => setLayout(layout)}
-          >
-            {layout.map((item) => (
-              <div
-                key={item.i}
-                className="relative text-white bg-primary border flex justify-center items-center border-white rounded-lg p-3 shadow-lg z-10"
-              >
-                <button
-                  className="absolute top-0 right-0 m-1 p-1 bg-muted/80 text-white rounded-full size-6 flex items-center justify-center cursor-pointer z-20"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    deleteItem(item.i);
-                  }}
+          {cols > 0 && (
+            <ResponsiveGridLayout
+              style={{ paddingTop: `${gap * 4}px` }}
+              layouts={{ lg: layout }}
+              breakpoints={breakpoints}
+              cols={colsResponsive}
+              useCSSTransforms={true}
+              rowHeight={100}
+              margin={[gap * 4, gap * 4]}
+              compactType={null}
+              containerPadding={[0, 0]}
+              isDraggable={true}
+              isResizable={true}
+              onLayoutChange={(layout) => setLayout(layout)}
+            >
+              {layout.map((item) => (
+                <div
+                  key={item.i}
+                  className="relative text-white bg-primary border flex justify-center items-center border-white rounded-lg p-3 shadow-lg z-20"
                 >
-                  <TrashIcon className="size-4 text-destructive" />
-                </button>
-                {item.i}
-              </div>
-            ))}
-          </ResponsiveGridLayout>
+                  <button
+                    className="absolute top-0 right-0 m-1 p-1 bg-muted/80 text-white rounded-full size-6 flex items-center justify-center cursor-pointer z-50"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteItem(item.i);
+                    }}
+                  >
+                    <TrashIcon className="size-4 text-destructive" />
+                  </button>
+                  {item.i}
+                </div>
+              ))}
+            </ResponsiveGridLayout>
+          )}
         </div>
         <GeneratedCodeCard
-                rows={rows}
-                cols={cols}
-                gap={gap}
-                layout={layout}
-                codeContainerRef={codeContainerRef}
-            />
-        
+          rows={rows}
+          cols={cols}
+          gap={gap}
+          layout={layout}
+          codeContainerRef={codeContainerRef}
+        />
       </div>
     );
 };
