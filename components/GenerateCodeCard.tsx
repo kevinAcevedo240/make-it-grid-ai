@@ -7,7 +7,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { Label } from './ui/label';
 import { generateCssCode, generateHtmlCode, generateTailwindCode } from '@/utils/GenerateTailwindCode';
 import toast from 'react-hot-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
