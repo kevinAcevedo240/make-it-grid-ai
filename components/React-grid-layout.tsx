@@ -22,9 +22,7 @@ const ExampleGrid = () => {
     const [rows, setRows] = useState(3);
     const [cols, setCols] = useState(3);
     const [gap, setGap] = useState(2);
-    const [layout, setLayout] = useState<{ i: string; x: number; y: number; w: number; h: number; }[]>([
-        { i: '1', x: 1, y: 1, w: 1, h: 1 },
-    ]);
+    const [layout, setLayout] = useState<{ i: string; x: number; y: number; w: number; h: number; }[]>([]);
     const codeContainerRef = useRef<HTMLPreElement>(null);
     const [items, setItems] = useState<Item[]>([]);
 
