@@ -30,7 +30,7 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
     };
 
     return (
-        <Card className="mt-6">
+        <Card className="mt-12">
             <CardHeader>
                 <CardTitle>
                     <div className="flex justify-between items-center">

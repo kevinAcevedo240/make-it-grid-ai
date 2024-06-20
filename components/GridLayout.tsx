@@ -55,9 +55,7 @@ const GridLayout = () => {
         <div
           className="relative w-full"
           style={{
-            paddingBottom: `calc(${rows} * 100px + ${
-              gap * 4 * (rows - 1)
-            }px + 1rem)`,
+            paddingBottom: `calc(${rows} * 100px)`,
           }}
         >
           {cols > 0 && rows > 0 && (
@@ -109,8 +107,12 @@ const GridLayout = () => {
                   className="relative text-white bg-primary border flex justify-center items-center border-white rounded-lg p-3 shadow-lg z-20"
                 >
                   <button
-                    className="absolute top-0 right-0 m-1 p-1 bg-muted/80 text-white rounded-full size-6 flex items-center justify-center cursor-pointer z-50"
+                    className="absolute top-0 right-0 m-1 p-1 bg-muted/80 text-white rounded-full size-6 flex items-center justify-center cursor-pointer z-auto"
                     onClick={(e) => {
+                      e.stopPropagation();
+                      deleteItem(item.i);
+                    }}
+                    onTouchEnd={(e) => {
                       e.stopPropagation();
                       deleteItem(item.i);
                     }}
