@@ -3,58 +3,20 @@ import { Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import GridSettings from './GridSettings';
-import { CopyIcon, TrashIcon } from "@radix-ui/react-icons";
+import { TrashIcon } from "@radix-ui/react-icons";
 import { Button } from './ui/button';
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import { Label } from './ui/label';
-import { generateTailwindCode } from '@/utils/GenerateTailwindCode';
-import toast from 'react-hot-toast';
-import { Item } from '@/types';
+import GeneratedCodeCard from './GenerateCodeCard';
+import useGridItems from '@/hooks/useGridItems';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-const ExampleGrid = () => {
+const GridLayout = () => {
     const [rows, setRows] = useState(3);
     const [cols, setCols] = useState(3);
     const [gap, setGap] = useState(2);
-    const [layout, setLayout] = useState<{ i: string; x: number; y: number; w: number; h: number; }[]>([]);
     const codeContainerRef = useRef<HTMLPreElement>(null);
-    const [items, setItems] = useState<Item[]>([]);
 
-    const handleAddItem = (x: number, y: number) => {
-        const newItemKey = `${layout.length + 1}`;
-        const newItem = {
-            i: newItemKey,
-            x: x,
-            y: y,
-            w: 1,
-            h: 1
-        };
-        
-        // Verificar si hay un item en la posición (x, y)
-        const exists = layout.some(item => item.x === x && item.y === y);
-        
-        if (!exists) {
-            setLayout([...layout, newItem]);
-        } else {
-            const updatedLayout = layout.map(item => {
-                if (item.y >= y) {
-                    return { ...item, y: item.y + 1 };
-                }
-                return item;
-            });
-            setLayout([...updatedLayout, newItem]);
-        }
-    };
-
-    const handleDeleteItem = (id: string) => {
-        setLayout(layout.filter(item => item.i !== id));
-    };
+    const { layout, addItem, deleteItem, setLayout } = useGridItems([]);
 
     const handleResetGrid = () => {
         setLayout([]);
@@ -63,16 +25,6 @@ const ExampleGrid = () => {
         setGap(2);
     };
 
-    const handleCopyToClipboard = () => {
-        if (codeContainerRef.current) {
-            const codeToCopy = codeContainerRef.current.innerText.trim();
-            navigator.clipboard.writeText(codeToCopy)
-                .then(() => toast.success('Code Copied to Clipboard!'))
-                .catch((err) => console.error('Failed to copy:', err));
-        }
-    };
-
-    // Define breakpoints y cols para ResponsiveGridLayout
     const breakpoints = { lg: 1200, md: 960, sm: 720, xs: 480, xxs: 0 };
     const colsResponsive = { lg: cols, md: cols, sm: cols, xs: cols, xxs: cols };
 
@@ -118,11 +70,10 @@ const ExampleGrid = () => {
                 return (
                   <div
                     key={index}
-                    onClick={() => handleAddItem(x, y)}
+                    onClick={() => addItem(x, y)}
                     className="relative border border-gray-400 dark:border-gray-100 transition-all duration-300 hover:bg-secondary/30 rounded-lg h-full flex items-center justify-center z-0"
                     style={{ zIndex: 1 }}
                   >
-                    {/* Botón para agregar ítem */}
                     <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white rounded-full size-6 sm:size-8 flex items-center justify-center cursor-pointer z-1">
                       <span className="text-xl sm:text-2xl">+</span>
                     </button>
@@ -154,7 +105,7 @@ const ExampleGrid = () => {
                   className="absolute top-0 right-0 m-1 p-1 bg-muted/80 text-white rounded-full size-6 flex items-center justify-center cursor-pointer z-20"
                   onClick={(e) => {
                     e.stopPropagation();
-                    handleDeleteItem(item.i);
+                    deleteItem(item.i);
                   }}
                 >
                   <TrashIcon className="size-4 text-destructive" />
@@ -164,36 +115,16 @@ const ExampleGrid = () => {
             ))}
           </ResponsiveGridLayout>
         </div>
-        <Card className="mt-6">
-          <CardHeader>
-            <CardTitle>
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl sm:text-2xl">Generated Tailwind Code</h2>
-                <Button
-                  onClick={handleCopyToClipboard}
-                  className="p-2 dark:border dark:border-primary dark:bg-primary/0"
-                >
-                  <CopyIcon className="size-4" />
-                </Button>
-              </div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-6">
-              <div className="grid gap-3">
-                <Label htmlFor="name">JSX Code:</Label>
-                <pre
-                  ref={codeContainerRef}
-                  className="border rounded-lg p-2 overflow-x-auto"
-                >
-                  {generateTailwindCode(rows, cols, gap, items)}
-                </pre>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <GeneratedCodeCard
+                rows={rows}
+                cols={cols}
+                gap={gap}
+                layout={layout}
+                codeContainerRef={codeContainerRef}
+            />
+        
       </div>
     );
 };
 
-export default ExampleGrid;
+export default GridLayout;

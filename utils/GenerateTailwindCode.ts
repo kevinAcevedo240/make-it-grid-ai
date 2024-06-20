@@ -1,11 +1,14 @@
-import { Item } from "@/types";
+import { Layout } from 'react-grid-layout';
 
+export const generateTailwindCode = (rows: number, cols: number, gap: number, layout: Layout[]): string => {
+  const itemPositions = layout.map(item => {
+    const colStart = item.x + 1;
+    const rowStart = item.y + 1;
+    const colSpan = item.w > 1 ? ` col-span-${item.w}` : '';
+    const rowSpan = item.h > 1 ? ` row-span-${item.h}` : '';
 
-export const generateTailwindCode = (rows: number, cols: number, gap: number, items: Item[]): string => {
-  const itemPositions = items.map(item => {
-    const [row, col] = item.position.split('-').map(Number);
     return `
-    <div className="row-start-${row + 1} col-start-${col + 1}">${item.id}</div>`;
+    <div className="col-start-${colStart} row-start-${rowStart}${colSpan}${rowSpan}">${item.i}</div>`;
   }).join('');
 
   return `
