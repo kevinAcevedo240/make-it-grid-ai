@@ -5,19 +5,15 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="rounded-lg shadow m-4">
-      <div className="w-full mx-auto max-w-screen-xl p-4  flex items-center justify-center justify-between">
-        {/* Contenido principal */}
-
+    <footer className="w-full p-4 bg-gray-800 text-white">
+      <div className="w-full mx-auto max-w-screen-xl flex items-center justify-between">
         <a
           href="https://www.linkedin.com/in/kevin-julian-acevedo-salazar/"
-          
         >
           Made by <span className="underline">Kevin Acevedo</span>
         </a>
 
-        {/* Íconos */}
-        <ul className="flex flex-wrap items-center justify-center  mt-3 space-x-5 text-sm font-medium text-primary dark:text-gray-400 sm:mt-0">
+        <ul className="flex flex-wrap items-center justify-center mt-3 space-x-5 text-sm font-medium">
           <a href="https://github.com/kevinAcevedo240">
             <svg
               className="w-6 h-6"

@@ -46,76 +46,81 @@ const GridLayout = () => {
           setGap={setGap}
         />
 
-        <div
-          className="relative w-full "
-          
-        >
-          {cols > 0 && rows > 0 && (
-            <div
-              className="grid w-full absolute"
-              style={{
-                gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-                gridTemplateRows: `repeat(${rows}, minmax(100px, 1fr))`,
-                gap: `${gap * 4}px`,
-                padding: `${gap * 4}px 0`,
-              }}
-            >
-              {Array.from({ length: rows * cols }).map((_, index) => {
-                const x = index % cols;
-                const y = Math.floor(index / cols);
-                return (
+        <div className='flex flex-col m-auto w-full  py-10 '>
+          <div
+            className="relative "
+            style={{ width: "100%", height: `${rows * 100}px` }}
+          >
+            {cols > 0 && rows > 0 && (
+              <div
+                className="grid w-full absolute"
+                style={{
+                  gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+                  gridTemplateRows: `repeat(${rows}, minmax(100px, 1fr))`,
+                  gap: `${gap * 4}px`,
+                  padding: `${gap * 4}px 0`,
+                }}
+              >
+                {Array.from({ length: rows * cols }).map((_, index) => {
+                  const x = index % cols;
+                  const y = Math.floor(index / cols);
+                  return (
+                    <div
+                      key={index}
+                      onClick={() => addItem(x, y)}
+                      className="relative border border-gray-400 dark:border-gray-100 transition-all duration-300 hover:bg-secondary/30 rounded-lg h-full flex items-center justify-center z-0"
+                      style={{ zIndex: 1 }}
+                    >
+                      <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white rounded-full size-6 sm:size-8 flex items-center justify-center cursor-pointer z-1">
+                        <span className="text-xl sm:text-2xl">+</span>
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            {cols > 0 && (
+              <ResponsiveGridLayout
+                style={{ paddingTop: `${gap * 4}px` }}
+                layouts={{ lg: layout }}
+                breakpoints={breakpoints}
+                cols={colsResponsive}
+                useCSSTransforms={true}
+                rowHeight={100}
+                margin={[gap * 4, gap * 4]}
+                compactType={null}
+                containerPadding={[0, 0]}
+                isDraggable={true}
+                isResizable={true}
+                onLayoutChange={(layout) => setLayout(layout)}
+              >
+                {layout.map((item) => (
                   <div
-                    key={index}
-                    onClick={() => addItem(x, y)}
-                    className="relative border border-gray-400 dark:border-gray-100 transition-all duration-300 hover:bg-secondary/30 rounded-lg h-full flex items-center justify-center z-0"
-                    style={{ zIndex: 1 }}
+                    key={item.i}
+                    className="relative text-white bg-primary border flex justify-center items-center border-white rounded-lg p-3 shadow-lg z-20"
                   >
-                    <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white rounded-full size-6 sm:size-8 flex items-center justify-center cursor-pointer z-1">
-                      <span className="text-xl sm:text-2xl">+</span>
+                    <button
+                      className="absolute top-0 right-0 m-1 p-1 bg-muted/80 text-white rounded-full size-6 flex items-center justify-center cursor-pointer z-auto"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        deleteItem(item.i);
+                      }}
+                      onTouchEnd={(e) => {
+                        e.stopPropagation();
+                        deleteItem(item.i);
+                      }}
+                    >
+                      <TrashIcon className="size-4 text-destructive" />
                     </button>
+                    {item.i}
                   </div>
-                );
-              })}
-            </div>
-          )}
-          {cols > 0 && (
-            <ResponsiveGridLayout
-              style={{ paddingTop: `${gap * 4}px` }}
-              layouts={{ lg: layout }}
-              breakpoints={breakpoints}
-              cols={colsResponsive}
-              useCSSTransforms={true}
-              rowHeight={100}
-              margin={[gap * 4, gap * 4]}
-              compactType={null}
-              containerPadding={[0, 0]}
-              isDraggable={true}
-              isResizable={true}
-              onLayoutChange={(layout) => setLayout(layout)}
-            >
-              {layout.map((item) => (
-                <div
-                  key={item.i}
-                  className="relative text-white bg-primary border flex justify-center items-center border-white rounded-lg p-3 shadow-lg z-20"
-                >
-                  <button
-                    className="absolute top-0 right-0 m-1 p-1 bg-muted/80 text-white rounded-full size-6 flex items-center justify-center cursor-pointer z-auto"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      deleteItem(item.i);
-                    }}
-                    onTouchEnd={(e) => {
-                      e.stopPropagation();
-                      deleteItem(item.i);
-                    }}
-                  >
-                    <TrashIcon className="size-4 text-destructive" />
-                  </button>
-                  {item.i}
-                </div>
-              ))}
-            </ResponsiveGridLayout>
-          )}
+                ))}
+              </ResponsiveGridLayout>
+            )}
+          </div>
+        </div>
+        <div className='h-28'>
+
         </div>
       </div>
     );
