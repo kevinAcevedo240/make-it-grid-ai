@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CopyIcon } from "@radix-ui/react-icons";
+import * as Icons from "@/components/icons";
 import { Button } from './ui/button';
 import {
     Card,
@@ -7,7 +7,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { generateCssCode, generateHtmlCode, generateTailwindCode } from '@/utils/GenerateTailwindCode';
+import { generateCssCode, generateFlexboxCode, generateHtmlCode, generateTailwindCode } from '@/utils/GenerateCode';
 import toast from 'react-hot-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 
@@ -31,8 +31,12 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
         } else if (activeTab === 'html') {
             const htmlCode = generateHtmlCode( layout);
             const cssCode = generateCssCode(rows, cols, gap, layout);
-            codeToCopy = `<! -- HTML CODE -->\n\n${htmlCode}\n\n<! -- CSS CODE -->\n\n${cssCode}`;
-        }
+            codeToCopy = `<! -- HTML CODE -->\n\n${htmlCode}\n\n<! -- GRID CSS CODE -->\n\n${cssCode}`;
+        } else if (activeTab === 'flexbox') {
+          const htmlCode = generateHtmlCode( layout);
+          const cssCode = generateFlexboxCode(rows, cols, gap, layout);
+          codeToCopy = `<! -- HTML CODE -->\n\n${htmlCode}\n\n<! -- FLEXBOX CSS CODE -->\n\n${cssCode}`;
+      }
 
         if (codeToCopy) {
             navigator.clipboard.writeText(codeToCopy)
@@ -42,57 +46,67 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
     };
 
     return (
-      <Card className="mt-12">
-        <CardHeader>
-          <CardTitle>
-            <div className="flex justify-between items-center">
-              <h2 className="text-2xl">Generated Code</h2>
-              <Button
-                onClick={handleCopyToClipboard}
-                className="p-2 dark:border dark:border-primary dark:bg-primary/0"
-              >
-                <CopyIcon className="size-4" />
+      <div className="grid gap-6 m-4 md:m-0 md:mt-4">
+        <div className="grid gap-3">
+          <Tabs
+            defaultValue="jsx"
+            onValueChange={setActiveTab}
+            className="overflow-x-auto"
+          >
+            <div className="flex justify-between">
+              <TabsList className="bg-muted-foreground/30">
+                <TabsTrigger value="jsx" className='px-2'>JSX TAILWIND</TabsTrigger>
+                <TabsTrigger value="html" className='px-2'>CSS GRID</TabsTrigger>
+                <TabsTrigger value="flexbox" className='px-2'>CSS FLEXBOX</TabsTrigger>
+              </TabsList>
+              <Button onClick={handleCopyToClipboard} 
+              className="p-2 dark:border dark:border-primary dark:bg-primary/0 active:scale-90">
+                <Icons.Copy className="size-4" />
               </Button>
             </div>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-6">
-            <div className="grid gap-3">
-              <Tabs defaultValue="jsx" onValueChange={setActiveTab} className="overflow-x-auto">
-                <TabsList>
-                  <TabsTrigger value="jsx">JSX</TabsTrigger>
-                  <TabsTrigger value="html">HTML / CSS</TabsTrigger>
-                </TabsList>
-                <TabsContent value="jsx">
-                  <pre
-                    ref={codeContainerRef}
-                    className="border rounded-lg p-2 overflow-x-auto max-h-64 overflow-y-auto"
-                  >
-                    {generateTailwindCode(rows, cols, gap, layout)}
-                  </pre>
-                </TabsContent>
-                <TabsContent value="html">
-                  <div className="md:grid md:grid-cols-2 md:gap-4 space-y-4 md:space-y-0">
-                    <pre
-                      ref={codeContainerRef}
-                      className="border rounded-lg p-2 overflow-x-auto max-h-64 overflow-y-auto"
-                    >
-                      {generateHtmlCode(layout)}
-                    </pre>
-                    <pre
-                      ref={codeContainerRef}
-                      className="border rounded-lg p-2 overflow-x-auto max-h-64 overflow-y-auto"
-                    >
-                      {generateCssCode(rows, cols, gap, layout)}
-                    </pre>
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+            <TabsContent value="jsx">
+              <pre
+                ref={codeContainerRef}
+                className="border rounded-lg p-2 overflow-x-auto max-h-64 overflow-y-auto"
+              >
+                {generateTailwindCode(rows, cols, gap, layout)}
+              </pre>
+            </TabsContent>
+            <TabsContent value="html">
+              <div className="md:grid md:grid-cols-2 md:gap-4 space-y-4 md:space-y-0">
+                <pre
+                  ref={codeContainerRef}
+                  className="border rounded-lg p-2 overflow-x-auto max-h-64 overflow-y-auto"
+                >
+                  {generateHtmlCode(layout)}
+                </pre>
+                <pre
+                  ref={codeContainerRef}
+                  className="border rounded-lg p-2 overflow-x-auto max-h-64 overflow-y-auto"
+                >
+                  {generateCssCode(rows, cols, gap, layout)}
+                </pre>
+              </div>
+            </TabsContent>
+            <TabsContent value="flexbox">
+              <div className="md:grid md:grid-cols-2 md:gap-4 space-y-4 md:space-y-0">
+                <pre
+                  ref={codeContainerRef}
+                  className="border rounded-lg p-2 overflow-x-auto max-h-64 overflow-y-auto"
+                >
+                  {generateHtmlCode(layout)}
+                </pre>
+                <pre
+                  ref={codeContainerRef}
+                  className="border rounded-lg p-2 overflow-x-auto max-h-64 overflow-y-auto"
+                >
+                  {generateFlexboxCode(rows, cols, gap, layout)}
+                </pre>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </div>
     );
 };
 

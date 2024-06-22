@@ -64,3 +64,35 @@ export const generateCssCode = (rows: number, cols: number, gap: number, layout:
 
   return baseStyles + itemStyles;
 };
+
+
+export const generateFlexboxCode = (rows: number, cols: number, gap: number, layout: Layout[]): string => {
+  const baseStyles = `
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: ${gap * 4}px;
+  }
+  .item {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
+  }
+  `;
+
+  const itemStyles = layout.map((item, index) => {
+    const width = (item.w / cols) * 100;
+    const height = (item.h / rows) * 100;
+
+    return `
+    .item-${index + 1} {
+      flex: 0 0 ${width}%;
+      height: calc(${height}% - ${gap * 4}px);
+    }
+    `;
+  }).join('');
+
+  return baseStyles + itemStyles;
+};

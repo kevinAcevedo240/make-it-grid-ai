@@ -2,11 +2,10 @@
 
 "use client"
 
-import * as React from "react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
+import * as Icons from "@/components/icons";
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme()
@@ -16,11 +15,11 @@ export function ModeToggle() {
   }
 
   return (
-    <Button onClick={toggleTheme} variant="ghost" size="sm" className="h-10 w-10 px-0">
+    <Button onClick={toggleTheme} variant="ghost" size="sm" className="size-10 px-0 active:scale-90">
       {theme === "light" ? (
-        <MoonIcon className="transition-all 2xl:size-7 text-muted-foreground size-8" />
+        <Icons.Dark className="transition-all 2xl:size-7 text-muted-foreground size-8" />
       ) : (
-        <SunIcon className="transition-all 2xl:size-7 size-8" />
+        <Icons.Light className="transition-all 2xl:size-7 size-8" />
       )}
       <span className="sr-only">Toggle theme</span>
     </Button>

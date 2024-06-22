@@ -1,4 +1,3 @@
-'use client'
 
 
 import GridLayout from "@/components/GridLayout";
