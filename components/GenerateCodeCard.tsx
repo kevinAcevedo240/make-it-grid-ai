@@ -55,9 +55,9 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
           >
             <div className="flex justify-between">
               <TabsList className="bg-muted-foreground/30">
-                <TabsTrigger value="jsx" className='px-2'>JSX TAILWIND</TabsTrigger>
-                <TabsTrigger value="html" className='px-2'>CSS GRID</TabsTrigger>
-                <TabsTrigger value="flexbox" className='px-2'>CSS FLEXBOX</TabsTrigger>
+                <TabsTrigger value="jsx" className='px-2 text-xs md:text-sm'>JSX TAILWIND</TabsTrigger>
+                <TabsTrigger value="html" className='px-2 text-xs md:text-sm'>CSS GRID</TabsTrigger>
+                <TabsTrigger value="flexbox" className='px-2 text-xs md:text-sm'>CSS FLEXBOX</TabsTrigger>
               </TabsList>
               <Button onClick={handleCopyToClipboard} 
               className="p-2 dark:border dark:border-primary dark:bg-primary/0 active:scale-90">

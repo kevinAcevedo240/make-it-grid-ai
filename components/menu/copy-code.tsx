@@ -40,25 +40,6 @@ export const CopyCode = () => {
     gap,
   } = useContext(GridContext)
 
-  const openDialog = () => {
-    setShowDialog(true);
-  };
-
-  const openDrawer = () => {
-    // Lógica para abrir drawer en móvil (implementación no proporcionada)
-    console.log("Abrir drawer en móvil");
-  };
-
-  const handleButtonClick = () => {
-    if (isDesktopOrLaptop) {
-      openDialog(); // Abrir diálogo en pantalla grande
-    } else if (isMobile) {
-      openDrawer(); // Abrir drawer en móvil
-    }
-  };
-
-
-  
 
   return (
     <div>
@@ -69,7 +50,6 @@ export const CopyCode = () => {
               <TooltipTrigger>
               <Button
                 className="bg-primary  active:scale-90"
-                onClick={handleButtonClick}
               >
                 <Icons.Copy className="size-5 text-white" />
                 <span className="sr-only">Copy Code</span>
@@ -102,7 +82,6 @@ export const CopyCode = () => {
           <DrawerTrigger asChild>
             <Button
               className="bg-primary active:scale-90"
-              onClick={handleButtonClick}
             >
               <Icons.Copy className="size-5 text-white" />
               <span className="sr-only">Copy Code</span>
