@@ -49,7 +49,7 @@ export const CopyCode = () => {
             <DialogTrigger asChild>
               <TooltipTrigger>
               <Button
-                className="bg-primary  active:scale-90"
+                className="copy-step bg-primary  active:scale-90"
               >
                 <Icons.Copy className="size-5 text-white" />
                 <span className="sr-only">Copy Code</span>
@@ -81,7 +81,7 @@ export const CopyCode = () => {
         <Drawer>
           <DrawerTrigger asChild>
             <Button
-              className="bg-primary active:scale-90"
+              className="copy-step bg-primary active:scale-90"
             >
               <Icons.Copy className="size-5 text-white" />
               <span className="sr-only">Copy Code</span>

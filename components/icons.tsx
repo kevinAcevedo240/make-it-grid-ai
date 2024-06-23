@@ -58,6 +58,8 @@ import {
   UserIcon,
   XIcon,
   Smartphone,
+  InfoIcon,
+  LifeBuoy,
 } from "lucide-react";
 
 // Brands
@@ -110,6 +112,8 @@ const Settings = SettingsIcon;
 const Trash = Trash2Icon;
 const Mobile = Smartphone;
 const Desktop = IconDeviceDesktop;
+const Info = InfoIcon;
+const help = LifeBuoy;
 
 // Project-specific
 const Paintbrush = PaintbrushIcon;
@@ -182,4 +186,6 @@ export {
   Xcom,
   Mobile,
   Desktop,
+  Info,
+  help,
 };

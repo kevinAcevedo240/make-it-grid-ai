@@ -12,7 +12,7 @@ export const Website = () => {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button className="border-primary border dark:bg-primary/0 active:scale-90">
+        <Button className="website-step border-primary border dark:bg-primary/0 active:scale-90">
           <Link href="https://www.kevin-acevedo.dev/" target="_blank">
             <Icons.Globe className="size-5" />
             <span className="sr-only">Website</span>

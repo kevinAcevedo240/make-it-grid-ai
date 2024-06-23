@@ -1,4 +1,3 @@
-// app/layout.tsx
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -10,6 +9,7 @@ import { FloatingMenu } from "@/components/menu/floating-menu";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { GridProvider } from '@/hooks/useGridContext';
 import NavBar from "@/components/navbar";
+
 
 const inter = Inter({ subsets: ["latin"] });
 

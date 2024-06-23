@@ -6,9 +6,10 @@ import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import GridSettings from './GridSettings';
 import { TrashIcon} from "@radix-ui/react-icons";
-import useGridItems from '@/hooks/useGridItems';
 import { Button } from './ui/button';
 import { GridContext } from '@/hooks/useGridContext';
+import GuideButton from './Guide-Button';
+
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -35,6 +36,7 @@ const GridLayout = () => {
         xxs: Math.max(cols, 1) 
     };
 
+
     return (
       <div className="mt-8">
         <GridSettings
@@ -46,7 +48,9 @@ const GridLayout = () => {
           setGap={setGap}
         />
 
-        <div className='flex flex-col m-auto w-full  py-10 '>
+       <GuideButton/>
+
+        <div className="grid-step flex flex-col m-auto w-full  pb-9 pt-4 ">
           <div
             className="relative "
             style={{ width: "100%", height: `${rows * 100}px` }}
@@ -119,9 +123,7 @@ const GridLayout = () => {
             )}
           </div>
         </div>
-        <div className='h-28'>
-
-        </div>
+        <div className="h-28"></div>
       </div>
     );
 };

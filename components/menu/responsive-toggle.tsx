@@ -11,7 +11,7 @@ export const ResponsiveToggle = () => {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Tabs defaultValue="mobile" className="overflow-x-auto rounded-lg">
+        <Tabs defaultValue="mobile" className="responsive-step overflow-x-auto rounded-lg">
           <TabsList className="bg-muted-foreground/40 dark:bg-muted">
             <TabsTrigger value="mobile">
               <Icons.Mobile className="size-5 text-white" />
