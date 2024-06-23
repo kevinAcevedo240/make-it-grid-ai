@@ -1,3 +1,6 @@
+
+
+
 export const steps = [
   {
     selector: '.input-step',
@@ -19,10 +22,10 @@ export const steps = [
     selector: '.random-step',
     content: 'Generate random grid configurations for experimentation 🎲',
   },
-  {
-    selector: '.responsive-step',
-    content: 'Preview how the grid layout responds across different screen sizes.',
-  },
+  //  {
+  //    selector: '.responsive-step',
+  //    content: 'Preview how the grid layout responds across different screen sizes.',
+  //  },
   {
     selector: '.github-step',
     content: 'Explore the GitHub repository and contribute to this open-source project!',
