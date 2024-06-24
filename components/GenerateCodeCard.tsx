@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as Icons from "@/components/icons";
 import { Button } from './ui/button';
-import { generateCssCode, generateFlexboxCode, generateHtmlCode, generateTailwindCode } from '@/utils/GenerateCode';
+import { generateCssCode, generateFlexboxCode, generateHtmlCode, generateHtmlFlexboxCode, generateTailwindCode } from '@/utils/GenerateCode';
 import toast from 'react-hot-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { generateSandboxUrl } from '@/lib/createSandbox';
@@ -144,7 +144,7 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
                   ref={codeContainerRef}
                   className="border rounded-lg p-2 overflow-x-auto sm:max-h-64 max-h-60 overflow-y-auto"
                 >
-                  {generateHtmlCode(layout)}
+                  {generateHtmlFlexboxCode(layout)}
                 </pre>
                 <pre
                   ref={codeContainerRef}

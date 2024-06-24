@@ -68,17 +68,19 @@ export const generateCssCode = (rows: number, cols: number, gap: number, layout:
 
 export const generateFlexboxCode = (rows: number, cols: number, gap: number, layout: Layout[]): string => {
   const baseStyles = `
-  .grid {
+  .container {
     display: flex;
     flex-wrap: wrap;
     gap: ${gap * 4}px;
+    margin: 1rem;
+    height: calc(100vh - 2rem); /* Adjust height as necessary */
   }
   .item {
-    background-color: #444;
-    color: #fff;
-    border-radius: 5px;
-    padding: 20px;
-    font-size: 150%;
+    background-color: #d1d5db;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    text-align: center;
+    box-sizing: border-box;
   }
   `;
 
@@ -88,11 +90,23 @@ export const generateFlexboxCode = (rows: number, cols: number, gap: number, lay
 
     return `
     .item-${index + 1} {
-      flex: 0 0 ${width}%;
+      flex: 0 0 calc(${width}% - ${gap * 4}px);
       height: calc(${height}% - ${gap * 4}px);
     }
     `;
   }).join('');
 
   return baseStyles + itemStyles;
+};
+
+export const generateHtmlFlexboxCode = (layout: Layout[]): string => {
+  const itemPositions = layout.map((item, index) => 
+  `<div class="item item-${index + 1}">${item.i}</div>
+  `).join('  ');
+
+  return `
+  <div class="container">
+    ${itemPositions}
+  </div>
+  `;
 };

@@ -1,4 +1,4 @@
-import { generateTailwindCode, generateHtmlCode, generateCssCode, generateFlexboxCode } from '@/utils/GenerateCode';
+import { generateTailwindCode, generateHtmlCode, generateCssCode, generateFlexboxCode, generateHtmlFlexboxCode } from '@/utils/GenerateCode';
 
 interface SandboxFileGeneratorProps {
     rows: number;
@@ -67,7 +67,7 @@ const sandboxFileGenerator = ({ rows, cols, gap, layout, activeTab }: SandboxFil
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    ${generateHtmlCode(layout)}
+    ${generateHtmlFlexboxCode(layout)}
 </body>
 </html>
                 `,
