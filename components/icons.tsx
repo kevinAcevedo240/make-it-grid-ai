@@ -10,6 +10,7 @@ import {
   IconBrandX,
   IconCopy,
   IconDeviceDesktop,
+  IconBrandCodesandbox,
 } from "@tabler/icons-react";
 import {
   ArrowBigLeftDashIcon,
@@ -70,6 +71,7 @@ const Google = IconBrandGoogleFilled;
 const Xcom = IconBrandX;
 const Paypal = IconBrandPaypalFilled;
 const Apple = IconBrandApple;
+const Codesandbox = IconBrandCodesandbox;
 
 // Icons used by shadcn
 const ArrowLeft = ArrowLeftIcon;
@@ -188,4 +190,5 @@ export {
   Desktop,
   Info,
   help,
+  Codesandbox,
 };

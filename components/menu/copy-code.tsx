@@ -3,9 +3,7 @@ import { Button } from "../ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import {
@@ -21,14 +19,12 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useMediaQuery } from "react-responsive"; // Importar react-responsive para manejar media queries
+import { useMediaQuery } from "react-responsive"; 
 import { useContext, useRef, useState } from "react";
-import useGridItems from "@/hooks/useGridItems";
 import GeneratedCodeCard from "../GenerateCodeCard";
 import { GridContext } from "@/hooks/useGridContext";
 
 export const CopyCode = () => {
-  const [showDialog, setShowDialog] = useState(false);
   const isDesktopOrLaptop = useMediaQuery({ minWidth: 768 }); // Media query para escritorio
   const isMobile = useMediaQuery({ maxWidth: 767 }); // Media query para móvil
   const codeContainerRef = useRef<HTMLPreElement>(null);
@@ -48,23 +44,26 @@ export const CopyCode = () => {
           <Tooltip>
             <DialogTrigger asChild>
               <TooltipTrigger>
-              <Button
-                className="copy-step bg-primary  active:scale-90"
-              >
-                <Icons.Copy className="size-5 text-white" />
-                <span className="sr-only">Copy Code</span>
-              </Button>
+                <Button className="copy-step bg-primary  active:scale-90">
+                  <Icons.Copy className="size-5 text-white" />
+                  <span className="sr-only">Copy Code</span>
+                </Button>
               </TooltipTrigger>
             </DialogTrigger>
-            <TooltipContent className="md:block hidden">Copy Code</TooltipContent>
+            <TooltipContent className="md:block hidden">
+              Copy Code
+            </TooltipContent>
           </Tooltip>
 
           <DialogContent className="md:block hidden">
             <DialogHeader>
-            <div className="flex justify-between items-center">
-              <h2 className="text-2xl">Generated Code</h2>
-              
-            </div>
+              <div className="flex flex-col justify-start items-start">
+                <h2 className="text-2xl">Generated Code</h2>
+                <span className="text-sm text-muted-foreground">
+                  Choose a format to copy the code. You can also test it
+                  directly in CodeSandbox by clicking the CodeSandbox button.
+                </span>
+              </div>
             </DialogHeader>
             <GeneratedCodeCard
               rows={rows}
@@ -80,9 +79,7 @@ export const CopyCode = () => {
       {isMobile && (
         <Drawer>
           <DrawerTrigger asChild>
-            <Button
-              className="copy-step bg-primary active:scale-90"
-            >
+            <Button className="copy-step bg-primary active:scale-90">
               <Icons.Copy className="size-5 text-white" />
               <span className="sr-only">Copy Code</span>
             </Button>
@@ -91,7 +88,10 @@ export const CopyCode = () => {
           <DrawerContent className="md:hidden">
             <DrawerHeader>
               <DrawerTitle>Generated Code</DrawerTitle>
-              <DrawerDescription>Copy the code below</DrawerDescription>
+              <DrawerDescription>
+                Choose a format to copy the code and/or test it directly
+                in CodeSandbox 
+              </DrawerDescription>
             </DrawerHeader>
             <GeneratedCodeCard
               rows={rows}
