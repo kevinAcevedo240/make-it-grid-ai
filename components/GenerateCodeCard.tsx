@@ -142,13 +142,13 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
               <div className="md:grid md:grid-cols-2 md:gap-4 space-y-4 md:space-y-0">
                 <pre
                   ref={codeContainerRef}
-                  className="border rounded-lg p-2 overflow-x-auto max-h-64 overflow-y-auto"
+                  className="border rounded-lg p-2 overflow-x-auto sm:max-h-64 max-h-60 overflow-y-auto"
                 >
                   {generateHtmlCode(layout)}
                 </pre>
                 <pre
                   ref={codeContainerRef}
-                  className="border rounded-lg p-2 overflow-x-auto max-h-64 overflow-y-auto"
+                  className="border rounded-lg p-2 overflow-x-auto sm:max-h-64 max-h-60 overflow-y-auto"
                 >
                   {generateFlexboxCode(rows, cols, gap, layout)}
                 </pre>
