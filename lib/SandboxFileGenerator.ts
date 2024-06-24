@@ -13,36 +13,24 @@ const sandboxFileGenerator = ({ rows, cols, gap, layout, activeTab }: SandboxFil
         return {
           "index.html": {
             content: `
-                    <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>HTML + CSS</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Grid Layout made with tailwind - MakeItGrid</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     ${generateTailwindCode(rows, cols, gap, layout)} 
   </body>
 </html>
                 `,
-          },
-          "package.json": {
-            content: JSON.stringify({
-              name: "MakeItGrid-TailwindCSS",
-              version: "1.0.0",
-              description: "A grid using TailwindCSS",
-              main: "index.html",
-              license: "MIT",
-              devDependencies: {
-                serve: "11.2.0",
-              },
-              dependencies: {
-                tailwindcss: "3.4.3",
-              },
-            }),
-          },
+          }
+          
         };
     };
 

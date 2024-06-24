@@ -8,11 +8,11 @@ export const generateTailwindCode = (rows: number, cols: number, gap: number, la
     const rowSpan = item.h > 1 ? ` row-span-${item.h}` : '';
 
     return `
-    <div className="col-start-${colStart} row-start-${rowStart}${colSpan}${rowSpan}">${item.i}</div>`;
+    <div class="col-start-${colStart} row-start-${rowStart}${colSpan}${rowSpan} bg-gray-300 rounded-md p-2">${item.i}</div>`;
   }).join('');
 
   return `
-  <div className="grid grid-cols-${cols} grid-rows-${rows} gap-${gap}">
+  <div class="grid grid-cols-${cols} grid-rows-${rows} gap-${gap} m-4">
     ${itemPositions}
   </div>
   `;
