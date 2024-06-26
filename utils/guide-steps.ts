@@ -33,6 +33,8 @@ export const steps = [
   {
     selector: '.website-step',
     content: 'Discover more about me on my website 🌐',
+    highlightedSelectors: ['[data-tut="reactour__highlighted"]'],
+    mutationObservables: ['[data-tut="reactour__highlighted"]'],
   },
 ];
 

@@ -6,6 +6,8 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
   const [rows, setRows] = useState<number>(3);
   const [cols, setCols] = useState<number>(3);
   const [gap, setGap] = useState(2);
+  // const [mode, setMode] = useState<'mobile' | 'desktop'>('desktop');
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const addItem = useCallback((x: number, y: number) => {
     const newItemKey = `${layout.length + 1}`;
@@ -126,6 +128,8 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     rows,
     cols,
     gap,
+    isMobile,
+    setIsMobile,
     setGap,
     setRows,
     setCols,

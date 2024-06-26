@@ -2,52 +2,14 @@
   @tailwind components;
   @tailwind utilities;
 
-  /* @layer base {
-    :root {
-      --background: 0 0% 98.82%;
-      --foreground: 0 0% 12.55%;
-      --muted: 0 0% 97.65%;
-      --muted-foreground: 0 0% 39.22%;
-      --popover: 0 0% 97.65%;
-      --popover-foreground: 0 0% 12.55%;
-      --card: 0 0% 97.65%;
-      --card-foreground: 0 0% 12.55%;
-      --border: 0 0% 85.1%;
-      --input: 0 0% 80.78%;
-      --primary: 10 78% 54%;
-      --primary-foreground: 0 0% 98.82%;
-      --secondary: 0 0% 55.29%;
-      --secondary-foreground: 0 0% 98.82%;
-      --accent: 0 0% 90.98%;
-      --accent-foreground: 0 0% 12.55%;
-      --destructive: 0 65.08% 50.59%;
-      --destructive-foreground: 0 0% 98.82%;
-      --ring: 10 78% 54%;
-      --radius: 0.5rem;
-    }
-  
-    .dark {
-      --background: 0 0% 6.67%;
-      --foreground: 0 0% 93.33%;
-      --muted: 0 0% 9.8%;
-      --muted-foreground: 0 0% 70.59%;
-      --popover: 0 0% 9.8%;
-      --popover-foreground: 0 0% 93.33%;
-      --card: 0 0% 9.8%;
-      --card-foreground: 0 0% 93.33%;
-      --border: 0 0% 22.75%;
-      --input: 0 0% 28.24%;
-      --primary: 10 78% 54%;
-      --primary-foreground: 0 0% 93.33%;
-      --secondary: 0 0% 43.14%;
-      --secondary-foreground: 0 0% 93.33%;
-      --accent: 0 0% 16.47%;
-      --accent-foreground: 0 0% 93.33%;
-      --destructive: 358.09 75.12% 59.02%;
-      --destructive-foreground: 0 0% 93.33%;
-      --ring: 10 78% 54%;
-    }
-  } */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.custom-shadow {
+  box-shadow: 18px 20px 40px 20px #d6d6d6, 
+  -20px -20px 60px #ffffff;
+}
 
   @layer base {
     :root {

@@ -13,7 +13,7 @@ const GuideButton: React.FC = () => {
       };
 
     return (
-        <Button onClick={handleOpenTour} className="gap-2 rounded-full sm:rounded-xl">
+        <Button onClick={handleOpenTour} className="gap-2 rounded-xl sm:rounded-xl">
           <Icons.Info className="size-5 text-white" />
           <span className='hidden md:block'>Quick Tour</span>
         </Button>

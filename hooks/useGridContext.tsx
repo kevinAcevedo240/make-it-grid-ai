@@ -13,6 +13,7 @@ export const GridContext = createContext<GridContextType>({
   cols: 0,
   layout: [],
   gap: 0,
+  isMobile: false,
   addItem: () => {},
   deleteItem: () => {},
   setLayout: () => {},
@@ -21,6 +22,7 @@ export const GridContext = createContext<GridContextType>({
   setGap: () => {},
   randomizeGrid: () => {},
   ResetGrid: () => {},
+  setIsMobile: () => {},
   
 });
 
