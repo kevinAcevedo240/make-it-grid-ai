@@ -6,10 +6,6 @@
     display: none;
 }
 
-.custom-shadow {
-  box-shadow: 18px 20px 40px 20px #d6d6d6, 
-  -20px -20px 60px #ffffff;
-}
 
   @layer base {
     :root {

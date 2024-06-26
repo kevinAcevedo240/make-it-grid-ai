@@ -57,7 +57,7 @@ export const CopyCode = () => {
 
           <DialogContent className="md:block hidden">
             <DialogHeader>
-              <div className="flex flex-col justify-start items-start">
+              <div className="flex flex-col justify-start items-start mb-4">
                 <h2 className="text-2xl">Generated Code</h2>
                 <span className="text-sm text-muted-foreground">
                   Choose a format to copy the code. You can also test it

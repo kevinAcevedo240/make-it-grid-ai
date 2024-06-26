@@ -18,6 +18,10 @@ const config = {
       },
     },
     extend: {
+      boxShadow: {
+        'custom': '18px 20px 40px 20px #d6d6d6, -20px -20px 60px #ffffff',
+        'dark-custom': '8px 8px 16px #070707, -8px -8px 16px #1b1b1b',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

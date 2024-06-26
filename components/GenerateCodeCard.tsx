@@ -85,14 +85,14 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
                   CSS FLEXBOX
                 </TabsTrigger>
               </TabsList>
-              <div className="flex gap-2">
+              <div className="flex gap-2 sm:gap-4">
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
                       onClick={handleOpenInCodeSandbox}
                       className="p-2 dark:border dark:border-primary dark:bg-primary/0 active:scale-90"
                     >
-                      <Icons.Codesandbox className="size-4" />
+                      <Icons.Codesandbox className="size-4 sm:size-5" />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent className="md:block hidden">
@@ -105,7 +105,7 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
                       onClick={handleCopyToClipboard}
                       className="p-2 dark:border dark:border-primary dark:bg-primary/0 active:scale-90"
                     >
-                      <Icons.Copy className="size-4" />
+                      <Icons.Copy className="size-4 sm:size-5" />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent className="md:block hidden">
