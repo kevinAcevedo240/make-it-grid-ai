@@ -15,7 +15,7 @@ export function ModeToggle() {
   }
 
   return (
-    <Button onClick={toggleTheme} variant="ghost" size="sm" className="size-10 px-0 active:scale-90">
+    <Button onClick={toggleTheme} variant="ghost" size="sm" className="size-10 px-0 active:scale-90 z-10">
       {theme === "light" ? (
         <Icons.Dark className="transition-all 2xl:size-7 text-muted-foreground size-8" />
       ) : (

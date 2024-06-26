@@ -2,14 +2,22 @@
 'use client'
 
 import GridLayout from "@/components/GridLayout";
-import { TourProvider, useTour } from '@reactour/tour'
+import { TourProvider } from '@reactour/tour'
 import { steps, styles } from "@/utils/guide-steps";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import Particles from "@/components/ui/particles";
+import NavBar from "@/components/navbar";
 
 
 
 export default function Home() {
-
-  const { currentStep } = useTour();
+  const { theme } = useTheme();
+  const [color, setColor] = useState("#ffffff");
+ 
+  useEffect(() => {
+    setColor(theme === "dark" ? "#ffffff" : "#000000");
+  }, [theme]);
   
   return (
     <TourProvider
@@ -18,7 +26,16 @@ export default function Home() {
       startAt={1}
       steps={steps}
     >
+      <NavBar/>
       <GridLayout/>
+      {/* <Particles
+        className="absolute inset-0"
+        quantity={100}
+        ease={60}
+        color={color}
+        refresh
+      /> */}
+
     </TourProvider>
   );
 }

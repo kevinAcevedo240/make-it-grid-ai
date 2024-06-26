@@ -35,7 +35,6 @@ export default function RootLayout({
           <TooltipProvider delayDuration={100}>
             <GridProvider>
               <div className="container mx-auto p-4 mt-2">
-                <NavBar/>
                 {children}
                 <FloatingMenu />
                 {/* <Footer /> */}

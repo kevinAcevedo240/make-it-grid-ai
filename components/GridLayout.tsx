@@ -42,9 +42,7 @@ const GridLayout = () => {
 
     return (
       <div className="mt-8">
-        <div className="flex justify-center items-center">
-          <div className="flex-grow ml-[10%]">
-            <GridSettings
+       <GridSettings
               rows={rows}
               cols={cols}
               gap={gap}
@@ -52,17 +50,12 @@ const GridLayout = () => {
               setCols={(value) => setCols(Math.max(0, value))}
               setGap={setGap}
             />
-          </div>
-          <div className="ml-auto ">
-            <GuideButton />
-          </div>
-        </div>
 
         <div
           className={`grid-step flex flex-col m-auto  transition-all duration-250 ease-in-out delay-100 
           ${
             isMobile && isDesktopOrLaptop
-              ? "p-6 overflow-y-auto no-scrollbar w-[410px] h-[min(80vh,900px)] bg-white dark:bg-transparent custom-shadow dark:shadow-none border-4 border-muted dark:border-muted-foreground rounded-[50px] mb-[5rem] "
+              ? "p-6 overflow-y-auto no-scrollbar w-[410px] 2xl:h-[min(68vh,900px)] h-[min(53vh,900px)] bg-white dark:bg-transparent custom-shadow dark:shadow-none border-4 border-muted dark:border-muted-foreground rounded-[50px] mb-[5rem] "
               : " pb-9 pt-4 w-full"
           }`}
         >

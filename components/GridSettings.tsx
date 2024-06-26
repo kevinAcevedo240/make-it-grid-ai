@@ -13,9 +13,9 @@ interface GridSettingsProps {
 
 const GridSettings: React.FC<GridSettingsProps> = ({ rows, cols, gap, setRows, setCols, setGap }) => {
   return (
-    <div className=" mb-6 flex justify-center items-center space-x-4">
+    <div className=" mb-6 flex justify-center items-center space-x-4 z-10">
       <div className='input-step flex gap-4'>
-      <div className="w-16 sm:w-24 flex flex-col justify-center items-center">
+      <div className="w-16 sm:w-24 flex flex-col justify-center items-center z-10">
         <Label htmlFor="rows" className="block mb-2 ">
           Rows
         </Label>
@@ -29,7 +29,7 @@ const GridSettings: React.FC<GridSettingsProps> = ({ rows, cols, gap, setRows, s
           className="p-1 border text-center text-lg"
         />
       </div>
-      <div className="w-16 sm:w-24 flex flex-col justify-center items-center">
+      <div className="w-16 sm:w-24 flex flex-col justify-center items-center z-10">
         <Label htmlFor="cols" className="block mb-2 ">
           Columns
         </Label>
@@ -43,7 +43,7 @@ const GridSettings: React.FC<GridSettingsProps> = ({ rows, cols, gap, setRows, s
           className="p-1 border text-center text-lg"
         />
       </div>
-      <div className="w-16 sm:w-24 flex flex-col justify-center items-center">
+      <div className="w-16 sm:w-24 flex flex-col justify-center items-center z-10">
         <Label htmlFor="gap" className="block mb-2">
           Gap
         </Label>
