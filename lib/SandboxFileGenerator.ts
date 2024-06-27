@@ -1,21 +1,17 @@
-import { generateTailwindCode, generateHtmlCode, generateCssCode, generateFlexboxCode, generateHtmlFlexboxCode } from '@/utils/GenerateCode';
-
 interface SandboxFileGeneratorProps {
-    rows: number;
-    cols: number;
-    gap: number;
-    layout: { i: string; x: number; y: number; w: number; h: number; }[];
+    code: string;
+    cssCode?: string;
     activeTab: string;
 }
 
-const sandboxFileGenerator = ({ rows, cols, gap, layout, activeTab }: SandboxFileGeneratorProps) => {
+const sandboxFileGenerator = ({ code, cssCode, activeTab }: SandboxFileGeneratorProps) => {
     const generateJsxFiles = () => {
         return {
-          "index.html": {
-            content: `
+            "index.html": {
+                content: `
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Grid Layout made with tailwind - MakeItGrid</title>
@@ -23,21 +19,20 @@ const sandboxFileGenerator = ({ rows, cols, gap, layout, activeTab }: SandboxFil
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-  </head>
-  <body>
-    ${generateTailwindCode(rows, cols, gap, layout)} 
-  </body>
+</head>
+<body>
+    ${code}
+</body>
 </html>
                 `,
-          }
-          
+            }
         };
     };
 
     const generateHtmlFiles = () => {
         return {
-          "index.html": {
-            content: `
+            "index.html": {
+                content: `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,14 +40,14 @@ const sandboxFileGenerator = ({ rows, cols, gap, layout, activeTab }: SandboxFil
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    ${generateHtmlCode(layout)}
+    ${code}
 </body>
 </html>
                 `,
-          },
-          "styles.css": {
-            content: generateCssCode(rows, cols, gap, layout),
-          },
+            },
+            "styles.css": {
+                content: cssCode,
+            },
         };
     };
 
@@ -67,13 +62,13 @@ const sandboxFileGenerator = ({ rows, cols, gap, layout, activeTab }: SandboxFil
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    ${generateHtmlFlexboxCode(layout)}
+    ${code}
 </body>
 </html>
                 `,
             },
             'styles.css': {
-                content: generateFlexboxCode(rows, cols, gap, layout),
+                content: cssCode,
             },
         };
     };
@@ -91,7 +86,7 @@ const sandboxFileGenerator = ({ rows, cols, gap, layout, activeTab }: SandboxFil
         }
     };
 
-    return generateSandboxFiles(); // Return the generate files based on the active tab
+    return generateSandboxFiles(); // Return the generated files based on the active tab
 };
 
 export default sandboxFileGenerator;

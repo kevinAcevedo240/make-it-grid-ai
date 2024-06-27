@@ -28,13 +28,13 @@ export default function Home() {
     >
       <NavBar/>
       <GridLayout/>
-      {/* <Particles
-        className="absolute inset-0"
+      <Particles
+        className="absolute inset-0 opacity-50"
         quantity={100}
         ease={60}
         color={color}
         refresh
-      /> */}
+      />
 
     </TourProvider>
   );

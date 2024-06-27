@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import * as Icons from "@/components/icons";
 import { Button } from './ui/button';
-import { generateCssCode, generateFlexboxCode, generateHtmlCode, generateHtmlFlexboxCode, generateTailwindCode } from '@/utils/GenerateCode';
 import toast from 'react-hot-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { generateSandboxUrl } from '@/lib/createSandbox';
-import SandboxFileGenerator from '@/lib/SandboxFileGenerator';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import useGridCodeGenerator from '@/hooks/useGridCodeGenerator';
+import sandboxFileGenerator from '@/lib/SandboxFileGenerator';
 
 interface GeneratedCodeCardProps {
     rows: number;
@@ -22,6 +22,7 @@ interface GeneratedCodeCardProps {
 
 const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, layout, codeContainerRef }) => {
     const [activeTab, setActiveTab] = useState('jsx');
+    const {htmlCode, htmlFlexboxCode, tailwindCode, cssCode, flexboxCode} = useGridCodeGenerator(rows, cols, gap, layout);
 
     const handleCopyToClipboard = () => {
       let codeToCopy = '';
@@ -33,13 +34,13 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
               }
               break;
           case 'html':
-              const htmlCode = generateHtmlCode(layout);
-              const cssGridCode = generateCssCode(rows, cols, gap, layout);
-              codeToCopy = `<! -- HTML CODE -->\n\n${htmlCode}\n\n<! -- GRID CSS CODE -->\n\n${cssGridCode}`;
+              const CodeHtml = {htmlCode};
+              const cssGridCode = {cssCode};
+              codeToCopy = `<! -- HTML CODE -->\n\n${CodeHtml}\n\n<! -- GRID CSS CODE -->\n\n${cssGridCode}`;
               break;
           case 'flexbox':
-              const flexboxHtmlCode = generateHtmlCode(layout);
-              const flexboxCssCode = generateFlexboxCode(rows, cols, gap, layout);
+              const flexboxHtmlCode = {htmlCode};
+              const flexboxCssCode = {htmlFlexboxCode};
               codeToCopy = `<! -- HTML CODE -->\n\n${flexboxHtmlCode}\n\n<! -- FLEXBOX CSS CODE -->\n\n${flexboxCssCode}`;
               break;
           default:
@@ -55,12 +56,31 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
   };
   
 
-    const handleOpenInCodeSandbox = async () => {
-        const sandboxFiles = SandboxFileGenerator({ rows, cols, gap, layout, activeTab });
-        
-        const sandboxUrl = await generateSandboxUrl(sandboxFiles);
-        window.open(sandboxUrl, '_blank');
-    };
+  const handleOpenInCodeSandbox = async () => {
+    let code = '';
+    let css = '';
+
+    switch (activeTab) {
+        case 'jsx':
+            code = tailwindCode;
+            break;
+        case 'html':
+            code = htmlCode;
+            css = cssCode;
+            break;
+        case 'flexbox':
+            code = htmlFlexboxCode;
+            css = flexboxCode;
+            break;
+        default:
+            break;
+    }
+
+    const sandboxFiles = sandboxFileGenerator({ code, cssCode: css, activeTab });
+
+    const sandboxUrl = await generateSandboxUrl(sandboxFiles);
+    window.open(sandboxUrl, '_blank');
+};
 
     return (
       <div className="grid gap-6 m-4 md:m-0 md:mt-4">
@@ -115,11 +135,11 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
               </div>
             </div>
             <TabsContent value="jsx">
-              <pre
+              <pre 
                 ref={codeContainerRef}
                 className="border rounded-lg p-2 overflow-x-auto max-h-64 overflow-y-auto"
               >
-                {generateTailwindCode(rows, cols, gap, layout)}
+                {tailwindCode}
               </pre>
             </TabsContent>
             <TabsContent value="html">
@@ -128,13 +148,13 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
                   ref={codeContainerRef}
                   className="border rounded-lg p-2 overflow-x-auto sm:max-h-64 max-h-60 overflow-y-auto"
                 >
-                  {generateHtmlCode(layout)}
+                  {htmlCode}
                 </pre>
                 <pre
                   ref={codeContainerRef}
                   className="border rounded-lg p-2 overflow-x-auto sm:max-h-64 max-h-60 overflow-y-auto"
                 >
-                  {generateCssCode(rows, cols, gap, layout)}
+                  {cssCode}
                 </pre>
               </div>
             </TabsContent>
@@ -144,13 +164,13 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
                   ref={codeContainerRef}
                   className="border rounded-lg p-2 overflow-x-auto sm:max-h-64 max-h-60 overflow-y-auto"
                 >
-                  {generateHtmlFlexboxCode(layout)}
+                  {htmlFlexboxCode}
                 </pre>
                 <pre
                   ref={codeContainerRef}
                   className="border rounded-lg p-2 overflow-x-auto sm:max-h-64 max-h-60 overflow-y-auto"
                 >
-                  {generateFlexboxCode(rows, cols, gap, layout)}
+                  {flexboxCode}
                 </pre>
               </div>
             </TabsContent>
