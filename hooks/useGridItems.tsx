@@ -1,13 +1,41 @@
 import { LayoutItem } from '@/types';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+
+const defaultRows = 3;
+const defaultCols = 3;
+const defaultGap = 2;
+const defaultLayout: LayoutItem[] = [];
 
 const useGridItems = (initialLayout: LayoutItem[] = []) => {
   const [layout, setLayout] = useState<LayoutItem[]>(initialLayout);
-  const [rows, setRows] = useState<number>(3);
-  const [cols, setCols] = useState<number>(3);
-  const [gap, setGap] = useState(2);
-  // const [mode, setMode] = useState<'mobile' | 'desktop'>('desktop');
+  const [rows, setRows] = useState<number>(defaultRows);
+  const [cols, setCols] = useState<number>(defaultCols);
+  const [gap, setGap] = useState(defaultGap);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  const saveToLocalStorage = useCallback((mode: 'desktop' | 'mobile', data: any) => {
+    localStorage.setItem(`grid-${mode}`, JSON.stringify(data));
+  }, []);
+
+  const loadFromLocalStorage = useCallback((mode: 'desktop' | 'mobile') => {
+    const storedData = localStorage.getItem(`grid-${mode}`);
+    if (storedData) {
+      const { rows, cols, gap, layout } = JSON.parse(storedData);
+      setRows(rows);
+      setCols(cols);
+      setGap(gap);
+      setLayout(layout);
+    } else {
+      setRows(defaultRows);
+      setCols(defaultCols);
+      setGap(defaultGap);
+      setLayout(defaultLayout);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadFromLocalStorage(isMobile ? 'mobile' : 'desktop');
+  }, [isMobile, loadFromLocalStorage]);
 
   const addItem = useCallback((x: number, y: number) => {
     const newItemKey = `${layout.length + 1}`;
@@ -22,7 +50,11 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     const exists = layout.some(item => item.x === x && item.y === y);
 
     if (!exists) {
-      setLayout(prevLayout => [...prevLayout, newItem]);
+      setLayout(prevLayout => {
+        const newLayout = [...prevLayout, newItem];
+        saveToLocalStorage(isMobile ? 'mobile' : 'desktop', { rows, cols, gap, layout: newLayout });
+        return newLayout;
+      });
     } else {
       const updatedLayout = layout.map(item => {
         if (item.y >= y) {
@@ -31,20 +63,22 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
         return item;
       });
       setLayout([...updatedLayout, newItem]);
+      saveToLocalStorage(isMobile ? 'mobile' : 'desktop', { rows, cols, gap, layout: [...updatedLayout, newItem] });
     }
-  }, [layout]);
+  }, [layout, rows, cols, gap, saveToLocalStorage, isMobile]);
 
   const deleteItem = useCallback((id: string) => {
-    setLayout(prevLayout => prevLayout.filter(item => item.i !== id));
-  }, []);
+    setLayout(prevLayout => {
+      const newLayout = prevLayout.filter(item => item.i !== id);
+      saveToLocalStorage(isMobile ? 'mobile' : 'desktop', { rows, cols, gap, layout: newLayout });
+      return newLayout;
+    });
+  }, [rows, cols, gap, isMobile, saveToLocalStorage]);
 
   const randomizeGrid = useCallback(() => {
-    console.log('Randomized grid');
+    const randomRows = Math.floor(Math.random() * 5) + 2;
+    const randomCols = Math.floor(Math.random() * 5) + 2;
 
-    const randomRows = Math.floor(Math.random() * 5) + 2; // Random rows between 2 and 6
-    const randomCols = Math.floor(Math.random() * 5) + 2; // Random cols between 2 and 6
-
-    // Create a grid of available spaces
     const availableSpaces = Array.from({ length: randomRows }, () =>
       Array(randomCols).fill(true)
     );
@@ -52,15 +86,12 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     const newLayout: LayoutItem[] = [];
 
     const addItemToLayout = (x: number, y: number, w: number, h: number) => {
-      // Adjust width and height if they exceed the grid bounds
       w = Math.min(w, randomCols - x);
       h = Math.min(h, randomRows - y);
 
-      // Check if the item fits within grid bounds
       if (x >= 0 && y >= 0 && x + w <= randomCols && y + h <= randomRows) {
         newLayout.push({ i: `${newLayout.length}`, x, y, w, h });
 
-        // Mark cells as occupied
         for (let row = y; row < y + h; row++) {
           for (let col = x; col < x + w; col++) {
             availableSpaces[row][col] = false;
@@ -69,15 +100,12 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
       }
     };
 
-    
-
     const getRandomSize = (maxWidth: number, maxHeight: number) => {
       const w = Math.floor(Math.random() * Math.min(2, maxWidth)) + 1;
       const h = Math.floor(Math.random() * Math.min(2, maxHeight)) + 1;
       return { w, h };
     };
 
-    // Generate initial layout
     for (let y = 0; y < randomRows; y++) {
       for (let x = 0; x < randomCols; x++) {
         if (availableSpaces[y][x]) {
@@ -87,16 +115,14 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
       }
     }
 
-    // Fill remaining empty spaces
     for (let y = 0; y < randomRows; y++) {
       for (let x = 0; x < randomCols; x++) {
         if (availableSpaces[y][x]) {
-          addItemToLayout(x, y, 1, 1); // Fill with a 1x1 item
+          addItemToLayout(x, y, 1, 1);
         }
       }
     }
 
-    // Filter out items that are out of bounds (just in case)
     const filteredLayout = newLayout.filter(
       item =>
         item.x >= 0 &&
@@ -105,20 +131,26 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
         item.y + item.h <= randomRows
     );
 
-    // Set the generated layout, rows, and columns
     setLayout(filteredLayout);
     setRows(randomRows);
     setCols(randomCols);
 
-    
-  }, []);
+    saveToLocalStorage(isMobile ? 'mobile' : 'desktop', { rows: randomRows, cols: randomCols, gap, layout: filteredLayout });
+  }, [gap, saveToLocalStorage, isMobile]);
 
-  const ResetGrid = () => {
-    setLayout([]);
-    setRows(3);
-    setCols(3);
-    setGap(2);
-};
+  const ResetGrid = useCallback(() => {
+    const defaultData = { rows: defaultRows, cols: defaultCols, gap: defaultGap, layout: defaultLayout };
+    setLayout(defaultLayout);
+    setRows(defaultRows);
+    setCols(defaultCols);
+    setGap(defaultGap);
+    saveToLocalStorage('desktop', defaultData);
+    saveToLocalStorage('mobile', defaultData);
+  }, [saveToLocalStorage]);
+
+  useEffect(() => {
+    saveToLocalStorage(isMobile ? 'mobile' : 'desktop', { rows, cols, gap, layout });
+  }, [layout, rows, cols, gap, isMobile, saveToLocalStorage]);
 
   return {
     layout,

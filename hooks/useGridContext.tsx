@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { createContext, useContext, ReactNode } from 'react';
 import useGridItems from './useGridItems';
@@ -23,7 +23,6 @@ export const GridContext = createContext<GridContextType>({
   randomizeGrid: () => {},
   ResetGrid: () => {},
   setIsMobile: () => {},
-  
 });
 
 export const GridProvider = ({ children }: GridProviderProps) => {
