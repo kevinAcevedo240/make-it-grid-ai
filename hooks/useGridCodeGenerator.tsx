@@ -9,17 +9,12 @@ const generateTailwindCode = (rows: number, cols: number, gap: number, layout: L
     const colSpan = item.w > 1 ? ` col-span-${item.w}` : '';
     const rowSpan = item.h > 1 ? ` row-span-${item.h}` : '';
 
-    if (isMobile) {
-      return `
+    return `
         <div class="col-start-${colStart} row-start-${rowStart}${colSpan}${rowSpan} bg-gray-300 rounded-md p-2">${item.i}</div>`;
-    } else {
-      return `
-        <div class="md:col-start-${colStart} md:row-start-${rowStart}${colSpan ? ` md:${colSpan}` : ''}${rowSpan ? ` md:${rowSpan}` : ''} bg-gray-300 rounded-md p-2">${item.i}</div>`;
-    }
   }).join('');
 
-  const gridCols = isMobile ? `grid-cols-${cols}` : `md:grid-cols-${cols}`;
-  const gridRows = isMobile ? `grid-rows-${rows}` : `md:grid-rows-${rows}`;
+  const gridCols = `grid-cols-${cols}`;
+  const gridRows = `grid-rows-${rows}`;
 
   return `
     <div class="grid ${gridCols} ${gridRows} gap-${gap} m-4">
