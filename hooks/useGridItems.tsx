@@ -33,12 +33,26 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     }
   }, []);
 
+  // Reset grid values to default on page load
+  useEffect(() => {
+    const defaultData = { rows: defaultRows, cols: defaultCols, gap: defaultGap, layout: defaultLayout };
+    saveToLocalStorage('desktop', defaultData);
+    saveToLocalStorage('mobile', defaultData);
+    setRows(defaultRows);
+    setCols(defaultCols);
+    setGap(defaultGap);
+    setLayout(defaultLayout);
+  }, [saveToLocalStorage]);
+
+  // Load layout from local storage when isMobile changes
   useEffect(() => {
     loadFromLocalStorage(isMobile ? 'mobile' : 'desktop');
   }, [isMobile, loadFromLocalStorage]);
 
   const addItem = useCallback((x: number, y: number) => {
-    const newItemKey = `${layout.length + 1}`;
+    const currentLength = layout.length;
+    const newItemKey = `${currentLength}`;
+
     const newItem: LayoutItem = {
       i: newItemKey,
       x: x,
