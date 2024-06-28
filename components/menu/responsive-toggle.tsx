@@ -9,7 +9,7 @@ import {
   } from "@/components/ui/tooltip";
 import { Tabs,  TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useContext } from "react";
-import { GridContext } from "@/hooks/useGridContext";
+import { GridContext } from "@/context/useGridContext";
 
 export const ResponsiveToggle = () => {
 

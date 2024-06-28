@@ -25,13 +25,20 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
       setCols(cols);
       setGap(gap);
       setLayout(layout);
+      return { rows, cols, gap, layout };
     } else {
       setRows(defaultRows);
       setCols(defaultCols);
       setGap(defaultGap);
       setLayout(defaultLayout);
+      return {
+        rows: defaultRows,
+        cols: defaultCols,
+        gap: defaultGap,
+        layout: defaultLayout,
+      };
     }
-  }, []);
+  }, [setRows, setCols, setGap, setLayout]);
 
   // Reset grid values to default on page load
   useEffect(() => {
@@ -181,6 +188,8 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     setCols,
     randomizeGrid,
     ResetGrid,
+    saveToLocalStorage,
+    loadFromLocalStorage,
   };
 };
 

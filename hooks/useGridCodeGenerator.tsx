@@ -1,6 +1,6 @@
 import { Layout } from 'react-grid-layout';
 import { useContext } from 'react';
-import { GridContext } from '@/hooks/useGridContext';
+import { GridContext } from '@/context/useGridContext';
 import { LayoutItem } from '@/types';
 
 const loadFromLocalStorage = (mode: 'desktop' | 'mobile') => {

@@ -6,9 +6,9 @@ import { GitHub } from "@/components/menu/github";
 import { Random } from "@/components/menu/random";
 import { Separator } from "@/components/ui/separator";
 import { Reset } from "./reset";
-import { CopyCode } from "./copy-code";
 import { ResponsiveToggle } from "./responsive-toggle";
 import { Website } from "./web";
+import {CopyCode} from "./copy-code";
 
 const Menu = () => {
   return (
@@ -18,10 +18,8 @@ const Menu = () => {
           <CopyCode />
           <Reset />
           <Random />
-          <div className="">
-            <Separator orientation="vertical" />
-            <ResponsiveToggle />
-          </div>
+          <Separator orientation="vertical" />
+          <ResponsiveToggle />
           <Separator orientation="vertical" />
           <GitHub />
           <Website />

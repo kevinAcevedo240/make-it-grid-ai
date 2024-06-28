@@ -12,7 +12,7 @@ export const steps = [
   },
   {
     selector: '.copy-step',
-    content: 'Copy generated code in various formats: Tailwind and CSS Grid',
+    content: 'Copy generated code in two formats: Tailwind and CSS Grid',
   },
   {
     selector: '.reset-step',

@@ -8,7 +8,7 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip";
 import useGridItems from '@/hooks/useGridItems';
-import { GridContext, useGridContext } from "@/hooks/useGridContext";
+import { GridContext, useGridContext } from "@/context/useGridContext";
 import { useContext } from "react";
 
 export const Random = () => {

@@ -23,4 +23,11 @@ export interface GridContextType {
   setIsMobile: React.Dispatch<React.SetStateAction<boolean>>;
   randomizeGrid: () => void;
   ResetGrid: () => void;
+  saveToLocalStorage: (mode: 'desktop' | 'mobile', data: any) => void; 
+  loadFromLocalStorage: (mode: 'desktop' | 'mobile') => {
+    rows: number;
+    cols: number;
+    layout: LayoutItem[];
+    gap: number;
+  }; 
 }

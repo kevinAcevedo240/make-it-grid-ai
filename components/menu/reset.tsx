@@ -6,7 +6,7 @@ import {
     TooltipContent,
     TooltipTrigger,
   } from "@/components/ui/tooltip";
-import { GridContext } from "@/hooks/useGridContext";
+import { GridContext } from "@/context/useGridContext";
 import { useContext } from "react";
 
 export const Reset = () => {
