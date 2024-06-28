@@ -19,7 +19,7 @@ export const GitHub = () => {
           </Link>
         </Button>
       </TooltipTrigger>
-      <TooltipContent  className="md:block hidden">It&apos;s Open Source!</TooltipContent>
+      <TooltipContent  className="md:block hidden text-center">It&apos;s Open Source! <br/> If you like it, consider giving it a star! 🌟</TooltipContent>
     </Tooltip>
   );
 };

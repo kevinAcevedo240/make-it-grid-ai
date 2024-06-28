@@ -92,14 +92,14 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
           >
             <div className="flex justify-between">
               <TabsList className="bg-muted-foreground/30 rounded-lg">
-                <TabsTrigger value="jsx" className="px-2 text-xs md:text-sm">
+                <TabsTrigger value="jsx" className="px-2 text-sm">
                   TAILWIND
                 </TabsTrigger>
-                <TabsTrigger value="html" className="px-2 text-xs md:text-sm">
+                <TabsTrigger value="html" className="px-2 text-sm">
                   CSS GRID
                 </TabsTrigger>
                 {/* No Available for now */}
-                
+
                 {/* <TabsTrigger
                   value="flexbox"
                   className="px-2 text-xs md:text-sm"
@@ -114,7 +114,7 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
                       onClick={handleOpenInCodeSandbox}
                       className="p-2 dark:border dark:border-primary dark:bg-primary/0 active:scale-90"
                     >
-                      <Icons.Codesandbox className="size-4 sm:size-5" />
+                      <Icons.Codesandbox className="size-5" />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent className="md:block hidden">
@@ -127,7 +127,7 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
                       onClick={handleCopyToClipboard}
                       className="p-2 dark:border dark:border-primary dark:bg-primary/0 active:scale-90"
                     >
-                      <Icons.Copy className="size-4 sm:size-5" />
+                      <Icons.Copy className="size-5" />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent className="md:block hidden">

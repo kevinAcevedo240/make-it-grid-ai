@@ -12,7 +12,7 @@ export const steps = [
   },
   {
     selector: '.copy-step',
-    content: 'Copy generated code in various formats: Tailwind CSS, CSS Grid, CSS Flexbox.',
+    content: 'Copy generated code in various formats: Tailwind and CSS Grid',
   },
   {
     selector: '.reset-step',
@@ -22,10 +22,10 @@ export const steps = [
     selector: '.random-step',
     content: 'Generate random grid configurations for experimentation 🎲',
   },
-  //  {
-  //    selector: '.responsive-step',
-  //    content: 'Preview how the grid layout responds across different screen sizes.',
-  //  },
+    {
+      selector: '.responsive-step',
+      content: 'Preview how the grid layout responds between mobile and desktop size and make your grid responsive!',
+    },
   {
     selector: '.github-step',
     content: 'Explore the GitHub repository and contribute to this open-source project!',

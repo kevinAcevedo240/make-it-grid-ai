@@ -22,7 +22,7 @@ export const Reset = () => {
         >
           <Icons.Reset className="size-5 text-white transition-transform duration-300 group-hover:rotate-35" />
           <span className="sr-only">Reset Layout</span>
-          <span className="text-white">Reset</span>
+          <span className="text-white hidden md:block">Reset</span>
         </Button>
       </TooltipTrigger>
       <TooltipContent className="md:block hidden">
