@@ -11,7 +11,7 @@ const loadFromLocalStorage = (mode: 'desktop' | 'mobile') => {
   return null;
 };
 
-const generateTailwindCode = (rows: number, cols: number, gap: number, layout: Layout[], isMobile: boolean): string => {
+const generateTailwindCode = () => {
   const mobileData = loadFromLocalStorage('mobile');
   const desktopData = loadFromLocalStorage('desktop');
 
@@ -74,24 +74,53 @@ const generateTailwindCode = (rows: number, cols: number, gap: number, layout: L
 };
 
 const generateHtmlCode = (layout: Layout[]): string => {
-  const itemPositions = layout.map((item, index) => 
-  `<div class="item item-${index + 1}">${item.i}</div>
-  `).join('  ');
+  const mobileData = loadFromLocalStorage('mobile');
+  const desktopData = loadFromLocalStorage('desktop');
+
+  if (!mobileData || !desktopData) {
+    return ''; // If any data is missing, return an empty string
+  }
+
+  const mobileLayout = mobileData.layout;
+  const desktopLayout = desktopData.layout;
+
+  const combinedItems = [
+    ...mobileLayout.map((mobileItem: LayoutItem) => {
+      const desktopItem = desktopLayout.find((item: LayoutItem) => item.i === mobileItem.i);
+      return desktopItem ? `<div class="item item-${mobileItem.i}">${mobileItem.i}</div>
+      ` : `<div class="item item-${mobileItem.i} mobile-only">${mobileItem.i}</div>
+      `;
+    }),
+    ...desktopLayout.filter((desktopItem: LayoutItem) => !mobileLayout.find((item: LayoutItem) => item.i === desktopItem.i)).map((desktopItem: LayoutItem) => {
+      return `<div class="item item-${desktopItem.i} desktop-only">${desktopItem.i}</div>
+      `;
+    })
+  ].join('');
 
   return `
   <div class="grid">
-    ${itemPositions}
+    ${combinedItems}
   </div>
   `;
 };
 
 const generateCssCode = (rows: number, cols: number, gap: number, layout: Layout[]): string => {
+  const mobileData = loadFromLocalStorage('mobile');
+  const desktopData = loadFromLocalStorage('desktop');
+
+  if (!mobileData || !desktopData) {
+    return ''; // If any data is missing, return an empty string
+  }
+
+  const mobileLayout = mobileData.layout;
+  const desktopLayout = desktopData.layout;
+  
   const baseStyles = `
   .grid {
     display: grid;
-    grid-template-columns: repeat(${cols}, 1fr);
-    grid-template-rows: repeat(${rows}, 1fr);
-    gap: ${gap * 4}px;
+    grid-template-columns: repeat(${mobileData.cols}, 1fr);
+    grid-template-rows: repeat(${mobileData.rows}, 1fr);
+    gap: ${mobileData.gap * 4}px;
   }
   .item {
     background-color: #444;
@@ -100,23 +129,58 @@ const generateCssCode = (rows: number, cols: number, gap: number, layout: Layout
     padding: 20px;
     font-size: 150%;
   }
+  .mobile-only {
+    display: block;
+  }
+  .desktop-only {
+    display: none;
+  }
   `;
 
-  const itemStyles = layout.map((item, index) => {
+  const itemsMobile = mobileLayout.map((item: LayoutItem, index: number) => {
     const colStart = item.x + 1;
     const rowStart = item.y + 1;
     const colSpan = item.w > 1 ? ` / span ${item.w}` : '';
     const rowSpan = item.h > 1 ? ` / span ${item.h}` : '';
 
     return `
-    .item-${index + 1} {
+    .item-${item.i} {
       grid-column: ${colStart}${colSpan};
       grid-row: ${rowStart}${rowSpan};
     }
     `;
   }).join('');
 
-  return baseStyles + itemStyles;
+  const itemsDesktop = desktopLayout.map((item: LayoutItem, index: number) => {
+    const colStart = item.x + 1;
+    const rowStart = item.y + 1;
+    const colSpan = item.w > 1 ? ` / span ${item.w}` : '';
+    const rowSpan = item.h > 1 ? ` / span ${item.h}` : '';
+
+    return `
+    .item-${item.i} {
+      grid-column: ${colStart}${colSpan};
+      grid-row: ${rowStart}${rowSpan};
+    }
+    `;
+  }).join('');
+
+  const mediaQueryDesktop = `@media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(${desktopData.cols}, 1fr);
+      grid-template-rows: repeat(${desktopData.rows}, 1fr);
+      gap: ${desktopData.gap * 4}px;
+    }
+    .mobile-only {
+      display: none;
+    }
+    .desktop-only {
+      display: block;
+    }
+    ${itemsDesktop}
+  }`;
+
+  return baseStyles + itemsMobile + mediaQueryDesktop;
 };
 
 const generateFlexboxCode = (rows: number, cols: number, gap: number, layout: Layout[]): string => {
@@ -167,7 +231,7 @@ const generateHtmlFlexboxCode = (layout: Layout[]): string => {
 const useGridCodeGenerator = (rows: number, cols: number, gap: number, layout: Layout[]) => {
   const { isMobile } = useContext(GridContext);
 
-  const tailwindCode = generateTailwindCode(rows, cols, gap, layout, isMobile);
+  const tailwindCode = generateTailwindCode();
   const htmlCode = generateHtmlCode(layout);
   const cssCode = generateCssCode(rows, cols, gap, layout);
   const flexboxCode = generateFlexboxCode(rows, cols, gap, layout);
