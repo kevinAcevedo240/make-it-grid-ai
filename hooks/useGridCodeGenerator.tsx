@@ -73,7 +73,7 @@ const generateTailwindCode = () => {
   `;
 };
 
-const generateHtmlCode = (layout: Layout[]): string => {
+const generateHtmlCode = (): string => {
   const mobileData = loadFromLocalStorage('mobile');
   const desktopData = loadFromLocalStorage('desktop');
 
@@ -104,7 +104,7 @@ const generateHtmlCode = (layout: Layout[]): string => {
   `;
 };
 
-const generateCssCode = (rows: number, cols: number, gap: number, layout: Layout[]): string => {
+const generateCssCode = (): string => {
   const mobileData = loadFromLocalStorage('mobile');
   const desktopData = loadFromLocalStorage('desktop');
 
@@ -137,7 +137,7 @@ const generateCssCode = (rows: number, cols: number, gap: number, layout: Layout
   }
   `;
 
-  const itemsMobile = mobileLayout.map((item: LayoutItem, index: number) => {
+  const itemsMobile = mobileLayout.map((item: LayoutItem) => {
     const colStart = item.x + 1;
     const rowStart = item.y + 1;
     const colSpan = item.w > 1 ? ` / span ${item.w}` : '';
@@ -151,7 +151,7 @@ const generateCssCode = (rows: number, cols: number, gap: number, layout: Layout
     `;
   }).join('');
 
-  const itemsDesktop = desktopLayout.map((item: LayoutItem, index: number) => {
+  const itemsDesktop = desktopLayout.map((item: LayoutItem) => {
     const colStart = item.x + 1;
     const rowStart = item.y + 1;
     const colSpan = item.w > 1 ? ` / span ${item.w}` : '';
@@ -232,8 +232,8 @@ const useGridCodeGenerator = (rows: number, cols: number, gap: number, layout: L
   const { isMobile } = useContext(GridContext);
 
   const tailwindCode = generateTailwindCode();
-  const htmlCode = generateHtmlCode(layout);
-  const cssCode = generateCssCode(rows, cols, gap, layout);
+  const htmlCode = generateHtmlCode();
+  const cssCode = generateCssCode();
   const flexboxCode = generateFlexboxCode(rows, cols, gap, layout);
   const htmlFlexboxCode = generateHtmlFlexboxCode(layout);
 
