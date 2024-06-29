@@ -59,7 +59,7 @@ const GridLayout = () => {
          className={`grid-step flex flex-col m-auto z-10 transition-all duration-250 ease-in-out delay-100 
           ${
             isMobile && isDesktopOrLaptop
-              ? "p-6 overflow-y-auto no-scrollbar w-[410px] 2xl:h-[min(68vh,900px)] h-[min(53vh,900px)] bg-white dark:bg-transparent shadow-custom dark:shadow-dark-custom border-4 border-muted dark:border dark:border-muted-foreground/10 rounded-[50px] mb-[5rem]"
+              ? "p-5 overflow-y-auto no-scrollbar w-[410px] 2xl:h-[min(68vh,900px)] h-[min(53vh,900px)] bg-white dark:bg-transparent shadow-custom dark:shadow-dark-custom border-8 border-muted dark:border-8 dark:border-muted rounded-[50px] mb-[5rem]"
               : "pb-9 pt-4 w-full"
           }`}
         
