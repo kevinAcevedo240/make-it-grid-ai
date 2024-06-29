@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "react-hot-toast";
-import { FloatingMenu } from "@/components/menu/floating-menu";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { GridProvider } from '@/context/useGridContext';
 
@@ -34,7 +33,6 @@ export default function RootLayout({
             <GridProvider>
               <div className="container mx-auto p-4 mt-2">
                 {children}
-                <FloatingMenu />
               </div>
               <Toaster />
             </GridProvider>

@@ -8,6 +8,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Particles from "@/components/ui/particles";
 import NavBar from "@/components/navbar";
+import { FloatingMenu } from "@/components/menu/floating-menu";
 
 
 
@@ -28,6 +29,7 @@ export default function Home() {
     >
       <NavBar/>
       <GridLayout/>
+      <FloatingMenu />
       <Particles
         className="absolute inset-0 opacity-50"
         quantity={100}
