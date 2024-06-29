@@ -114,7 +114,7 @@ const GridLayout = () => {
                 {layout.map((item) => (
                   <div
                     key={item.i}
-                    className="relative text-white bg-primary border flex justify-center items-center border-white rounded-lg p-3 shadow-lg z-20 cursor-grab active:cursor-grabbing group"
+                    className="relative text-white bg-primary border flex justify-center items-center border-white rounded-lg p-3 shadow-lg z-20 cursor-grab active:cursor-grabbing group transition-all duration-250 ease-in-out delay-100 "
                   >
                     <Tooltip>
                       <TooltipTrigger asChild>

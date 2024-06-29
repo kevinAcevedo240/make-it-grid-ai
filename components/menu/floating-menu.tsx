@@ -8,7 +8,8 @@ import { Separator } from "@/components/ui/separator";
 import { Reset } from "./reset";
 import { ResponsiveToggle } from "./responsive-toggle";
 import { Website } from "./web";
-import {CopyCode} from "./copy-code";
+import CopyCode from "./copy-code";
+
 
 const Menu = () => {
   return (
@@ -18,8 +19,10 @@ const Menu = () => {
           <CopyCode />
           <Reset />
           <Random />
-          <Separator orientation="vertical" />
-          <ResponsiveToggle />
+         <div>
+         <Separator orientation="vertical" />
+         <ResponsiveToggle />
+         </div>
           <Separator orientation="vertical" />
           <GitHub />
           <Website />
