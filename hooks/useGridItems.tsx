@@ -97,8 +97,9 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
   }, [rows, cols, gap, isMobile, saveToLocalStorage]);
 
   const randomizeGrid = useCallback(() => {
+    const maxCols = isMobile ? 3 : 5;
     const randomRows = Math.floor(Math.random() * 5) + 2;
-    const randomCols = Math.floor(Math.random() * 5) + 2;
+    const randomCols = Math.floor(Math.random() * maxCols) + 2;
 
     const availableSpaces = Array.from({ length: randomRows }, () =>
       Array(randomCols).fill(true)
@@ -136,6 +137,7 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
       }
     }
 
+    // Check and fill any remaining gaps
     for (let y = 0; y < randomRows; y++) {
       for (let x = 0; x < randomCols; x++) {
         if (availableSpaces[y][x]) {
@@ -145,7 +147,7 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     }
 
     const filteredLayout = newLayout.filter(
-      item =>
+      (item) =>
         item.x >= 0 &&
         item.y >= 0 &&
         item.x + item.w <= randomCols &&
@@ -156,8 +158,14 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     setRows(randomRows);
     setCols(randomCols);
 
-    saveToLocalStorage(isMobile ? 'mobile' : 'desktop', { rows: randomRows, cols: randomCols, gap, layout: filteredLayout });
+    saveToLocalStorage(isMobile ? "mobile" : "desktop", {
+      rows: randomRows,
+      cols: randomCols,
+      gap,
+      layout: filteredLayout,
+    });
   }, [gap, saveToLocalStorage, isMobile]);
+  
 
   const ResetGrid = useCallback(() => {
     const defaultData = { rows: defaultRows, cols: defaultCols, gap: defaultGap, layout: defaultLayout };
