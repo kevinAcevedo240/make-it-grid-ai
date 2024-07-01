@@ -22,27 +22,42 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
 
   // Load layout from local storage base on the selected Mode
   const loadFromLocalStorage = useCallback((mode: 'desktop' | 'mobile') => {
+    
     const storedData = localStorage.getItem(`grid-${mode}`);
     if (storedData) {
-      const { rows, cols, gap, layout } = JSON.parse(storedData);
+      const { rows, cols, gap } = JSON.parse(storedData);
       setRows(rows);
       setCols(cols);
       setGap(gap);
-      setLayout(layout);
-      return { rows, cols, gap, layout };
+      return { rows, cols, gap };
     } else {
       setRows(defaultRows);
       setCols(defaultCols);
       setGap(defaultGap);
-      setLayout(defaultLayout);
       return {
         rows: defaultRows,
         cols: defaultCols,
         gap: defaultGap,
+      };
+    }
+  }, [setRows, setCols, setGap]);
+
+  // Load layout from local storage base on the selected Mode
+  const loadFromLocalStorageLayout = useCallback((mode: 'desktop' | 'mobile') => {
+    
+    const storedData = localStorage.getItem(`grid-${mode}`);
+    if (storedData) {
+      const { layout } = JSON.parse(storedData);
+      
+      setLayout(layout);
+      return {layout };
+    } else {
+      setLayout(defaultLayout);
+      return {
         layout: defaultLayout,
       };
     }
-  }, [setRows, setCols, setGap, setLayout]);
+  }, [setLayout, isMobile]);
 
   // Reset grid values to default on page load
   useEffect(() => {
@@ -53,12 +68,15 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     setCols(defaultCols);
     setGap(defaultGap);
     setLayout(defaultLayout);
-  }, [saveToLocalStorage]);
+  }, []);
 
   // Load layout from local storage when isMobile changes
   useEffect(() => {
-    loadFromLocalStorage(isMobile ? 'mobile' : 'desktop');
-  }, [isMobile, loadFromLocalStorage]);
+    const mode = isMobile ? 'mobile' : 'desktop';
+    loadFromLocalStorage(mode);
+    loadFromLocalStorageLayout(mode);
+  }, [isMobile, loadFromLocalStorage, rows, cols]);
+ 
 
   // Add a new item to the layout
   const addItem = useCallback((x: number, y: number) => {
@@ -164,7 +182,6 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     setLayout(filteredLayout);
     setRows(randomRows);
     setCols(randomCols);
-
     saveToLocalStorage(isMobile ? "mobile" : "desktop", {
       rows: randomRows,
       cols: randomCols,
@@ -185,10 +202,6 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     saveToLocalStorage('mobile', defaultData);
   }, [saveToLocalStorage]);
 
-  // Save the layout to local storage when the layout changes
-  useEffect(() => {
-    saveToLocalStorage(isMobile ? 'mobile' : 'desktop', { rows, cols, gap, layout });
-  }, [layout, rows, cols, gap, isMobile, saveToLocalStorage]);
 
   return {
     layout,
