@@ -13,10 +13,13 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
   const [gap, setGap] = useState(defaultGap);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
+  // Save layout to local storage base on the selected Mode
   const saveToLocalStorage = useCallback((mode: 'desktop' | 'mobile', data: any) => {
     localStorage.setItem(`grid-${mode}`, JSON.stringify(data));
   }, []);
 
+
+  // Load layout from local storage base on the selected Mode
   const loadFromLocalStorage = useCallback((mode: 'desktop' | 'mobile') => {
     const storedData = localStorage.getItem(`grid-${mode}`);
     if (storedData) {
@@ -56,6 +59,7 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     loadFromLocalStorage(isMobile ? 'mobile' : 'desktop');
   }, [isMobile, loadFromLocalStorage]);
 
+  // Add a new item to the layout
   const addItem = useCallback((x: number, y: number) => {
     const currentLength = layout.length;
     const newItemKey = `${currentLength}`;
@@ -88,6 +92,7 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     }
   }, [layout, rows, cols, gap, saveToLocalStorage, isMobile]);
 
+  // Delete the item from the layout
   const deleteItem = useCallback((id: string) => {
     setLayout(prevLayout => {
       const newLayout = prevLayout.filter(item => item.i !== id);
@@ -96,6 +101,7 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     });
   }, [rows, cols, gap, isMobile, saveToLocalStorage]);
 
+  // Randomize the grid layout
   const randomizeGrid = useCallback(() => {
     const maxCols = isMobile ? 3 : 5;
     const randomRows = Math.floor(Math.random() * 5) + 2;
@@ -167,6 +173,7 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
   }, [gap, saveToLocalStorage, isMobile]);
   
 
+  // Reset the grid to the default values for both mobile and desktop versions.
   const ResetGrid = useCallback(() => {
     const defaultData = { rows: defaultRows, cols: defaultCols, gap: defaultGap, layout: defaultLayout };
     setLayout(defaultLayout);
@@ -177,6 +184,7 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     saveToLocalStorage('mobile', defaultData);
   }, [saveToLocalStorage]);
 
+  // Save the layout to local storage when the layout changes
   useEffect(() => {
     saveToLocalStorage(isMobile ? 'mobile' : 'desktop', { rows, cols, gap, layout });
   }, [layout, rows, cols, gap, isMobile, saveToLocalStorage]);
