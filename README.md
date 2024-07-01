@@ -1,7 +1,10 @@
 <div align="center">
+  
   <br />
-   [![image.jpg](https://i.postimg.cc/NF22ZyKx/image.jpg)](https://postimg.cc/8fDC6zBF)
-  <br />
+
+  [![image.jpg](https://i.postimg.cc/NF22ZyKx/image.jpg)](https://postimg.cc/8fDC6zBF)
+
+  <br/>
 
   <div>
     <img src="https://img.shields.io/badge/-Next_JS-black?style=for-the-badge&logoColor=white&logo=nextdotjs&color=000000" alt="nextdotjs" />
@@ -28,11 +31,7 @@
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
-- Next.js
-- Shadcn UI
-- Tailwind CSS
-- Typescript
-- React
+[![My Skills](https://skillicons.dev/icons?i=tailwind,typescript,react,nextjs)](https://skillicons.dev)<br/>
 
 ## <a name="features">🔋 Features</a>
 
@@ -70,8 +69,8 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-git clone https://github.com/kevinAcevedo240/make-it-grid-ai
-cd portfolio
+git clone https://github.com/kevinAcevedo240/make-it-grid-ai.git
+cd make-it-grid-ai
 ```
 
 **Installation**
@@ -89,3 +88,12 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
+
+
+## 💖 Support the Project
+
+Thank you so much already for using my project! If you want to go a step further and support my open source work, buy me a pizza:
+
+<a href='https://buymeacoffee.com/kevinacevedo' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://i.postimg.cc/C5JMPSN4/buymecoffe.png' border='0' alt='Buy Me a Coffee' /></a>
+
+To support the project directly, feel free to contribute with a pull request!
