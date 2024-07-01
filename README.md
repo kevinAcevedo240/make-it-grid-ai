@@ -92,7 +92,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 ## 💖 Support the Project
 
-Thank you so much already for using my project! If you want to go a step further and support my open source work, buy me a pizza:
+Thank you so much already for using my project! If you want to go a step further and support my open source work, buy me a coffe:
 
 <a href='https://buymeacoffee.com/kevinacevedo' target='_blank'><img height='42' style='border:0px;height:36px;' src='https://i.postimg.cc/C5JMPSN4/buymecoffe.png' border='0' alt='Buy Me a Coffee' /></a>
 
