@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { GridProvider } from '@/context/useGridContext';
 import { Analytics } from "@vercel/analytics/react"
+import { articleSchema } from "@/utils/article-schema";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -87,7 +88,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning> 
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link rel="canonical" href="https://make-it-grid-ai.vercel.app/" />
+        <script type="application/ld+json">
+          {JSON.stringify(articleSchema)}
+        </script>
+      </head>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
