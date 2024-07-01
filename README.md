@@ -94,6 +94,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 Thank you so much already for using my project! If you want to go a step further and support my open source work, buy me a pizza:
 
-<a href='https://buymeacoffee.com/kevinacevedo' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://i.postimg.cc/C5JMPSN4/buymecoffe.png' border='0' alt='Buy Me a Coffee' /></a>
+<a href='https://buymeacoffee.com/kevinacevedo' target='_blank'><img height='42' style='border:0px;height:36px;' src='https://i.postimg.cc/C5JMPSN4/buymecoffe.png' border='0' alt='Buy Me a Coffee' /></a>
 
 To support the project directly, feel free to contribute with a pull request!
