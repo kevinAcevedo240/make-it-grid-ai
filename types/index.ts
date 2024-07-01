@@ -24,10 +24,4 @@ export interface GridContextType {
   randomizeGrid: () => void;
   ResetGrid: () => void;
   saveToLocalStorage: (mode: 'desktop' | 'mobile', data: any) => void; 
-  loadFromLocalStorage: (mode: 'desktop' | 'mobile') => {
-    rows: number;
-    cols: number;
-    layout: LayoutItem[];
-    gap: number;
-  }; 
 }
