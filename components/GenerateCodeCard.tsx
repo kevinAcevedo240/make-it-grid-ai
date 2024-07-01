@@ -13,16 +13,12 @@ import useGridCodeGenerator from '@/hooks/useGridCodeGenerator';
 import sandboxFileGenerator from '@/lib/SandboxFileGenerator';
 
 interface GeneratedCodeCardProps {
-    rows: number;
-    cols: number;
-    gap: number;
-    layout: { i: string; x: number; y: number; w: number; h: number; }[];
     codeContainerRef: React.RefObject<HTMLPreElement>;
 }
 
-const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, layout, codeContainerRef }) => {
+const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({codeContainerRef }) => {
     const [activeTab, setActiveTab] = useState('tailwind');
-    const {htmlCode, tailwindCode, cssCode} = useGridCodeGenerator(rows, cols, gap, layout);
+    const {htmlCode, tailwindCode, cssCode} = useGridCodeGenerator();
 
     const handleCopyToClipboard = () => {
       let codeToCopy = '';

@@ -43,10 +43,6 @@ const GeneratedCodeModal: React.FC = () => {
               </div>
             </DialogHeader>
             <GeneratedCodeCard
-              rows={rows}
-              cols={cols}
-              layout={layout}
-              gap={gap}
               codeContainerRef={codeContainerRef}
             />
           </DialogContent>
@@ -67,10 +63,6 @@ const GeneratedCodeModal: React.FC = () => {
               </DrawerDescription>
             </DrawerHeader>
             <GeneratedCodeCard
-              rows={rows}
-              cols={cols}
-              layout={layout}
-              gap={gap}
               codeContainerRef={codeContainerRef}
             />
           </DrawerContent>
