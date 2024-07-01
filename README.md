@@ -2,7 +2,7 @@
   
   <br />
 
-  [![image.jpg](https://i.postimg.cc/NF22ZyKx/image.jpg)](https://postimg.cc/8fDC6zBF)
+  [![image.jpg](https://i.postimg.cc/NF22ZyKx/image.jpg)](https://www.kevin-acevedo.dev/)
 
   <br/>
 
