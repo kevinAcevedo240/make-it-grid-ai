@@ -14,9 +14,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "MakeItGrid | Bento Grid Generator",
   description:
-    "Empower your creativity with MakeItGrid, the ultimate platform for crafting and sharing customizable bento grids. Design, collaborate, and monetize your grid creations effortlessly, powered by AI.",
+    "Empower your creativity with MakeItGrid, the ultimate platform for crafting customizable bento grids.",
   authors: {
-    name: "MakeItGrid Team",
+    name: "Kevin Acevedo",
   },
   keywords: [
     "Bento Grid Generator",
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://make-it-grid-ai.vercel.app/og-image.png", 
+        url: "https://make-it-grid-ai.vercel.app/MakeItGrid_Logo.png", 
         width: 800,
         height: 600,
         alt: "MakeItGrid Logo",
