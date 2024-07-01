@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { GridProvider } from '@/context/useGridContext';
+import { Analytics } from "@vercel/analytics/react"
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -33,6 +34,7 @@ export default function RootLayout({
             <GridProvider>
               <div className="container mx-auto p-4 mt-2">
                 {children}
+                <Analytics />
               </div>
               <Toaster />
             </GridProvider>

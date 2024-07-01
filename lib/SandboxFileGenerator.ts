@@ -5,7 +5,7 @@ interface SandboxFileGeneratorProps {
 }
 
 const sandboxFileGenerator = ({ code, cssCode, activeTab }: SandboxFileGeneratorProps) => {
-    const generateJsxFiles = () => {
+    const generateTailwindFiles = () => {
         return {
             "index.html": {
                 content: `
@@ -36,7 +36,7 @@ const sandboxFileGenerator = ({ code, cssCode, activeTab }: SandboxFileGenerator
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>MakeItGrid</title>
+    <title>Grid Layout made with HTML and CSS - MakeItGrid</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -51,36 +51,13 @@ const sandboxFileGenerator = ({ code, cssCode, activeTab }: SandboxFileGenerator
         };
     };
 
-    const generateFlexboxFiles = () => {
-        return {
-            'index.html': {
-                content: `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>MakeItGrid</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-    ${code}
-</body>
-</html>
-                `,
-            },
-            'styles.css': {
-                content: cssCode,
-            },
-        };
-    };
 
     const generateSandboxFiles = () => {
         switch (activeTab) {
-            case 'jsx':
-                return generateJsxFiles();
-            case 'html':
+            case 'tailwind':
+                return generateTailwindFiles();
+            case 'cssgrid':
                 return generateHtmlFiles();
-            case 'flexbox':
-                return generateFlexboxFiles();
             default:
                 return {};
         }

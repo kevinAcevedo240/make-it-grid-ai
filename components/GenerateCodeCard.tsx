@@ -21,27 +21,20 @@ interface GeneratedCodeCardProps {
 }
 
 const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, layout, codeContainerRef }) => {
-    const [activeTab, setActiveTab] = useState('jsx');
-    const {htmlCode, htmlFlexboxCode, tailwindCode, cssCode, flexboxCode} = useGridCodeGenerator(rows, cols, gap, layout);
+    const [activeTab, setActiveTab] = useState('tailwind');
+    const {htmlCode, tailwindCode, cssCode} = useGridCodeGenerator(rows, cols, gap, layout);
 
     const handleCopyToClipboard = () => {
       let codeToCopy = '';
   
       switch (activeTab) {
-          case 'jsx':
+          case 'tailwind':
               if (codeContainerRef.current) {
                   codeToCopy = codeContainerRef.current.innerText.trim();
               }
               break;
-          case 'html':
-              const CodeHtml = {htmlCode};
-              const cssGridCode = {cssCode};
-              codeToCopy = `<! -- HTML CODE -->\n\n${CodeHtml}\n\n<! -- GRID CSS CODE -->\n\n${cssGridCode}`;
-              break;
-          case 'flexbox':
-              const flexboxHtmlCode = {htmlCode};
-              const flexboxCssCode = {htmlFlexboxCode};
-              codeToCopy = `<! -- HTML CODE -->\n\n${flexboxHtmlCode}\n\n<! -- FLEXBOX CSS CODE -->\n\n${flexboxCssCode}`;
+          case 'cssgrid':
+              codeToCopy = `<!-- HTML CODE -->\n\n${htmlCode}\n\n<!-- GRID CSS CODE -->\n\n${cssCode}`;
               break;
           default:
               console.error('Invalid tab selected');
@@ -61,16 +54,12 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
     let css = '';
 
     switch (activeTab) {
-        case 'jsx':
+        case 'tailwind':
             code = tailwindCode;
             break;
-        case 'html':
+        case 'cssgrid':
             code = htmlCode;
             css = cssCode;
-            break;
-        case 'flexbox':
-            code = htmlFlexboxCode;
-            css = flexboxCode;
             break;
         default:
             break;
@@ -86,26 +75,18 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
       <div className="grid gap-6 m-4 md:m-0 md:mt-4">
         <div className="grid gap-3">
           <Tabs
-            defaultValue="jsx"
+            defaultValue="tailwind"
             onValueChange={setActiveTab}
             className="overflow-x-auto"
           >
             <div className="flex justify-between">
               <TabsList className="bg-muted-foreground/30 rounded-lg">
-                <TabsTrigger value="jsx" className="px-2 text-sm">
+                <TabsTrigger value="tailwind" className="px-2 text-sm">
                   TAILWIND
                 </TabsTrigger>
-                <TabsTrigger value="html" className="px-2 text-sm">
+                <TabsTrigger value="cssgrid" className="px-2 text-sm">
                   CSS GRID
                 </TabsTrigger>
-                {/* No Available for now */}
-
-                {/* <TabsTrigger
-                  value="flexbox"
-                  className="px-2 text-xs md:text-sm"
-                >
-                  CSS FLEXBOX
-                </TabsTrigger> */}
               </TabsList>
               <div className="flex gap-2 sm:gap-4">
                 <Tooltip>
@@ -136,7 +117,7 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
                 </Tooltip>
               </div>
             </div>
-            <TabsContent value="jsx">
+            <TabsContent value="tailwind">
               <pre 
                 ref={codeContainerRef}
                 className="border rounded-lg p-2 overflow-x-auto max-h-72 overflow-y-auto"
@@ -144,35 +125,17 @@ const GeneratedCodeCard: React.FC<GeneratedCodeCardProps> = ({ rows, cols, gap, 
                 {tailwindCode}
               </pre>
             </TabsContent>
-            <TabsContent value="html">
+            <TabsContent value="cssgrid">
               <div className="md:grid md:grid-cols-2 md:gap-4 space-y-4 md:space-y-0">
                 <pre
-                  ref={codeContainerRef}
                   className="border rounded-lg p-2 overflow-x-auto sm:max-h-72 max-h-60 overflow-y-auto"
                 >
                   {htmlCode}
                 </pre>
                 <pre
-                  ref={codeContainerRef}
                   className="border rounded-lg p-2 overflow-x-auto sm:max-h-72 max-h-60 overflow-y-auto"
                 >
                   {cssCode}
-                </pre>
-              </div>
-            </TabsContent>
-            <TabsContent value="flexbox">
-              <div className="md:grid md:grid-cols-2 md:gap-4 space-y-4 md:space-y-0">
-                <pre
-                  ref={codeContainerRef}
-                  className="border rounded-lg p-2 overflow-x-auto sm:max-h-72 max-h-60 overflow-y-auto"
-                >
-                  {htmlFlexboxCode}
-                </pre>
-                <pre
-                  ref={codeContainerRef}
-                  className="border rounded-lg p-2 overflow-x-auto sm:max-h-72 max-h-60 overflow-y-auto"
-                >
-                  {flexboxCode}
                 </pre>
               </div>
             </TabsContent>

@@ -1,6 +1,4 @@
-import { Layout } from 'react-grid-layout';
-import { useContext } from 'react';
-import { GridContext } from '@/context/useGridContext';
+
 import { LayoutItem } from '@/types';
 
 const loadFromLocalStorage = (mode: 'desktop' | 'mobile') => {
@@ -183,61 +181,12 @@ const generateCssCode = (): string => {
   return baseStyles + itemsMobile + mediaQueryDesktop;
 };
 
-const generateFlexboxCode = (rows: number, cols: number, gap: number, layout: Layout[]): string => {
-  const baseStyles = `
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: ${gap * 4}px;
-    margin: 1rem;
-    height: calc(100vh - 2rem); /* Adjust height as necessary */
-  }
-  .item {
-    background-color: #d1d5db;
-    border-radius: 0.375rem;
-    padding: 0.5rem;
-    text-align: center;
-    box-sizing: border-box;
-  }
-  `;
-
-  const itemStyles = layout.map((item, index) => {
-    const width = (item.w / cols) * 100;
-    const height = (item.h / rows) * 100;
-
-    return `
-    .item-${index + 1} {
-      flex: 0 0 calc(${width}% - ${gap * 4}px);
-      height: calc(${height}% - ${gap * 4}px);
-    }
-    `;
-  }).join('');
-
-  return baseStyles + itemStyles;
-};
-
-const generateHtmlFlexboxCode = (layout: Layout[]): string => {
-  const itemPositions = layout.map((item, index) => 
-  `<div class="item item-${index + 1}">${item.i}</div>
-  `).join('  ');
-
-  return `
-  <div class="container">
-    ${itemPositions}
-  </div>
-  `;
-};
-
-const useGridCodeGenerator = (rows: number, cols: number, gap: number, layout: Layout[]) => {
-  const { isMobile } = useContext(GridContext);
-
+const useGridCodeGenerator = () => {
   const tailwindCode = generateTailwindCode();
   const htmlCode = generateHtmlCode();
   const cssCode = generateCssCode();
-  const flexboxCode = generateFlexboxCode(rows, cols, gap, layout);
-  const htmlFlexboxCode = generateHtmlFlexboxCode(layout);
 
-  return { tailwindCode, htmlCode, cssCode, flexboxCode, htmlFlexboxCode };
+  return { tailwindCode, htmlCode, cssCode };
 };
 
 export default useGridCodeGenerator;

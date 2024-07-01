@@ -32,7 +32,7 @@ const GeneratedCodeModal: React.FC = () => {
           <DialogTrigger asChild>
             <Button id="desktopDialogTrigger" className="hidden"></Button>
           </DialogTrigger>
-          <DialogContent className="md:block hidden">
+          <DialogContent className="md:block hidden max-w-[70rem]">
             <DialogHeader>
               <div className="flex flex-col justify-start items-start mb-4">
                 <h2 className="text-2xl">Generated Code</h2>

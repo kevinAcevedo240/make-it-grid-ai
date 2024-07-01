@@ -1,6 +1,7 @@
 import { LayoutItem } from '@/types';
 import { useState, useCallback, useEffect } from 'react';
 
+// Default values for the grid
 const defaultRows = 3;
 const defaultCols = 3;
 const defaultGap = 2;
