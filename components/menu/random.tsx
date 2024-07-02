@@ -1,5 +1,3 @@
-// components/menu/random.tsx
-
 import * as Icons from "@/components/icons";
 import { Button } from "../ui/button";
 import {
@@ -7,8 +5,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import useGridItems from '@/hooks/useGridItems';
-import { GridContext, useGridContext } from "@/context/useGridContext";
+import { GridContext } from "@/context/useGridContext";
 import { useContext } from "react";
 
 export const Random = () => {
@@ -19,6 +16,7 @@ export const Random = () => {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
+          aria-label="Randomize Grid"
           onClick={randomizeGrid}
             className="random-step dark:border-primary gap-3 dark:border bg-muted-foreground dark:bg-primary/0 active:scale-90"
           >

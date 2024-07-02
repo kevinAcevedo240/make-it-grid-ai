@@ -23,10 +23,10 @@ export const ResponsiveToggle = () => {
           className="responsive-step overflow-x-auto rounded-lg"
         >
           <TabsList className="bg-muted-foreground/40 dark:bg-muted">
-            <TabsTrigger value="mobile">
+            <TabsTrigger value="mobile" aria-label="Mobile Mode">
               <Icons.Mobile className="size-5 text-white" />
             </TabsTrigger>
-            <TabsTrigger value="desktop">
+            <TabsTrigger value="desktop" aria-label="Desktop Mode">
               <Icons.Desktop className="size-5 text-white" />
             </TabsTrigger>
           </TabsList>

@@ -21,11 +21,12 @@ const GuideButton: React.FC = () => {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
+            aria-label="Quick Tour"
             onClick={handleOpenTour}
             className="gap-2 rounded-xl sm:rounded-xl z-30"
           >
-            <Icons.Info className="size-5 text-white" />
-            <span className="hidden md:block">Quick Tour</span>
+            <Icons.Info className="size-6 text-white" />
+            <span className="hidden md:block font-semibold text-lg">Quick Tour</span>
           </Button>
         </TooltipTrigger>
         <TooltipContent className="md:block hidden">
