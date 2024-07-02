@@ -4,13 +4,13 @@ export const articleSchema = {
     headline: "MakeItGrid | Bento Grid Generator",
     author: "Kevin Acevedo",
     datePublished: "2024-06-30",
-    image: "https://make-it-grid-ai.vercel.app/MakeItGrid_Logo.png",
+    image: "https://www.makeitgrid.com/MakeItGrid_Logo.png",
     publisher: {
       "@type": "Organization",
       name: "MakeItGrid",
       logo: {
         "@type": "ImageObject",
-        url: "https://make-it-grid-ai.vercel.app/MakeItGrid_Logo.png",
+        url: "https://www.makeitgrid.com/MakeItGrid_Logo.png",
       },
     },
     description:

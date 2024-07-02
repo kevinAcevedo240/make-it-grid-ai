@@ -67,12 +67,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MakeItGrid | Bento Grid Generator",
     description:
-      "Empower your creativity with MakeItGrid, the ultimate platform for crafting customizable bento grids.",
-    url: "https://make-it-grid-ai.vercel.app/",
+      "Empower your creativity with MakeItGrid, the best platform for crafting customizable bento grids, Tailwind and HTML/CSS grids Generator.",
+    url: "https://www.makeitgrid.com/",
     type: "website",
     images: [
       {
-        url: "https://make-it-grid-ai.vercel.app/MakeItGrid_Logo.png", 
+        url: "https://www.makeitgrid.com/MakeItGrid_Logo.png", 
         width: 800,
         height: 600,
         alt: "MakeItGrid Logo",
@@ -96,7 +96,7 @@ export default function RootLayout({
           sizes="180x180"
           href="/apple-touch-icon.png"
         />
-        <link rel="canonical" href="https://make-it-grid-ai.vercel.app/" />
+        <link rel="canonical" href="https://www.makeitgrid.com/" />
         <script type="application/ld+json">
           {JSON.stringify(articleSchema)}
         </script>
