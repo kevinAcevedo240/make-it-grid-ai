@@ -53,6 +53,12 @@
 
 🚀 **Quick Tour**: Includes a quick guide to help you understand how the platform works, featuring a "Quick Tour" button.
 
+🚀 **SEO and Performance Optimization**: The project is SEO-friendly and performs efficiently, validated with high scores on PageSpeed Insights for optimal user experience.
+
+<br/>
+
+[![PageSpeedInsigth.png](https://i.postimg.cc/kgkj9XRT/image-2.png)](https://pagespeed.web.dev/analysis/https-www-makeitgrid-com/pwu96eaa2i?form_factor=desktop)
+
 
 ## <a name="quick-start">🤸 Quick Start</a>
 
