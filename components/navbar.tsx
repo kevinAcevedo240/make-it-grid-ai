@@ -1,6 +1,3 @@
-
-'use client'
-
 import GuideButton from './Guide-Button';
 import { ModeToggle } from './ui/theme-toggle';
 

@@ -1,6 +1,5 @@
 import React, { useContext, useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { GridContext } from '@/context/useGridContext';
 import GeneratedCodeCard from './GenerateCodeCard';
 import {
     Dialog,
@@ -19,7 +18,6 @@ import {
 import { Button } from './ui/button';
 
 const GeneratedCodeModal: React.FC = () => {
-  const { rows, cols, layout, gap } = useContext(GridContext);
   const codeContainerRef = useRef<HTMLPreElement>(null);
 
   const isDesktopOrLaptop = useMediaQuery({ minWidth: 768 });

@@ -15,7 +15,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "MakeItGrid | Bento Grid Generator",
   description:
-    "Empower your creativity with MakeItGrid, the ultimate platform for crafting customizable bento grids.",
+    "Empower your creativity with MakeItGrid, the ultimate platform for crafting customizable bento grids, Tailwind and HTML/CSS grids Generator.",
   authors: {
     name: "Kevin Acevedo",
   },
