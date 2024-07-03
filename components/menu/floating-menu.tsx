@@ -19,10 +19,10 @@ const Menu = () => {
           <CopyCode />
           <Reset />
           <Random />
-         <div>
-         <Separator orientation="vertical" />
-         <ResponsiveToggle />
-         </div>
+          <div>
+            <Separator orientation="vertical" />
+            <ResponsiveToggle />
+          </div>
           <Separator orientation="vertical" />
           <GitHub />
           <Website />
