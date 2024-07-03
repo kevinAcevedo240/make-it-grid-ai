@@ -15,7 +15,7 @@
     
   </div>
 
-  <h3 align="center">MakeItGrid | Bento Grid Generator</h3>
+  <h2 align="center">MakeItGrid | Bento Grid Generator</h2>
 
    <div align="center">
      Empower your creativity with MakeItGrid, the best platform for crafting customizable bento grids. 
