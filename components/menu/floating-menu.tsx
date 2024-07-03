@@ -9,6 +9,7 @@ import { Reset } from "./reset";
 import { ResponsiveToggle } from "./responsive-toggle";
 import { Website } from "./web";
 import CopyCode from "./copy-code";
+import BuyMeCoffee from "./buy-me-coffee";
 
 
 const Menu = () => {
@@ -26,6 +27,7 @@ const Menu = () => {
           <Separator orientation="vertical" />
           <GitHub />
           <Website />
+          <BuyMeCoffee />
         </div>
       </div>
     </div>

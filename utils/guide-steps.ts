@@ -36,6 +36,10 @@ export const steps = [
     highlightedSelectors: ['[data-tut="reactour__highlighted"]'],
     mutationObservables: ['[data-tut="reactour__highlighted"]'],
   },
+  {
+    selector: '.buymecoffee-step',
+    content: 'If you love this project, show your support by buying me a coffee! ☕️',
+  },
 ];
 
 
