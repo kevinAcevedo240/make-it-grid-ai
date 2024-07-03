@@ -75,7 +75,12 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     const mode = isMobile ? 'mobile' : 'desktop';
     loadFromLocalStorage(mode);
     loadFromLocalStorageLayout(mode);
-  }, [isMobile, loadFromLocalStorage, rows, cols]);
+  }, [loadFromLocalStorage, isMobile]);
+
+  // Save the layout to local storage when the layout changes
+  useEffect(() => {
+    saveToLocalStorage(isMobile ? 'mobile' : 'desktop', { rows, cols, gap, layout });
+  }, [layout, rows, cols, gap, saveToLocalStorage]);
  
 
   // Add a new item to the layout
@@ -201,6 +206,7 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     saveToLocalStorage('desktop', defaultData);
     saveToLocalStorage('mobile', defaultData);
   }, [saveToLocalStorage]);
+  
 
 
   return {
