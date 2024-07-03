@@ -88,7 +88,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en"> 
+    <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link
@@ -97,9 +97,10 @@ export default function RootLayout({
           href="/apple-touch-icon.png"
         />
         <link rel="canonical" href="https://www.makeitgrid.com/" />
-        <script type="application/ld+json">
-          {JSON.stringify(articleSchema)}
-        </script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        ></script>
       </head>
       <body className={inter.className}>
         <ThemeProvider
