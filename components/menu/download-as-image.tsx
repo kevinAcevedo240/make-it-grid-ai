@@ -10,7 +10,7 @@ const DownloadAsImage: React.FC = () => {
 
   // Filter function to exclude certain classes
   const filter = (node: HTMLElement) => {
-    const exclusionClasses = ['item-id', 'delete-button', 'upload-button', 'empty-item','mobile-mode', 'react-resizable-handle'];
+    const exclusionClasses = ['item-id', 'delete-button', 'upload-button', 'empty-item', 'react-resizable-handle'];
     return !exclusionClasses.some((classname) => node.classList?.contains(classname));
   };
 

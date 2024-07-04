@@ -174,7 +174,9 @@ const GridLayout: React.FC = () => {
                   <div
                     key={item.i}
                     onClick={() => handleItemClick(item.i)}
-                    className="relative text-white bg-primary border flex justify-center items-center border-white rounded-lg p-3 shadow-lg z-20 cursor-pointer group transition-all duration-250 ease-in-out delay-100"
+                    className={`relative text-white bg-primary flex justify-center border border-white items-center  rounded-lg p-3 shadow-lg z-20 cursor-pointer group transition-all duration-250 ease-in-out delay-100
+                      ${ (!isDesktopOrLaptop && selectedItem === item.i) ? "border-2 dark:border-white border-gray-800" : "md:duration-300 md:dark:hover:border-white md:hover:border-gray-800 md:hover:border-[3px]"}
+                       `}
                   >
                     {images[item.i] &&
                       typeof images[item.i] === "string" &&
@@ -191,9 +193,11 @@ const GridLayout: React.FC = () => {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <button
-                          className={`delete-button absolute top-0 right-0 m-1 p-1 bg-muted/80 text-white rounded-full size-6 flex items-center justify-center cursor-pointer z-10 ${
-                            (!isDesktopOrLaptop && selectedItem !== item.i) ? "hidden" : "block"
-                          } md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100`}
+                          className={`delete-button absolute top-0 md:translate-x-0 translate-x-1/2 md:-translate-y-0 -translate-y-1/2 right-0 m-1 p-1 bg-gray-800 dark:bg-white shadow-md text-white rounded-full size-7 flex items-center justify-center cursor-pointer z-30 
+                            ${ (!isDesktopOrLaptop && selectedItem !== item.i) ? "hidden" : "block"} 
+                            
+                          md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100
+                          `}
                           onClick={(e) => {
                             e.stopPropagation();
                             handleDeleteItem(item.i);
@@ -203,7 +207,7 @@ const GridLayout: React.FC = () => {
                             handleDeleteItem(item.i);
                           }}
                         >
-                          <TrashIcon className="size-4 text-destructive dark:text-white" />
+                          <TrashIcon className="size-5 dark:text-destructive " />
                         </button>
                       </TooltipTrigger>
                       <TooltipContent className="md:block hidden">
@@ -214,7 +218,7 @@ const GridLayout: React.FC = () => {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <button
-                          className={`upload-button absolute top-0 left-0 m-1 p-1 bg-muted/80 text-white rounded-full size-6 flex items-center justify-center cursor-pointer z-10 ${
+                          className={`upload-button absolute -translate-x-1/2 md:translate-x-0 -translate-y-1/2 md:-translate-y-0 top-0 left-0 m-1 p-1 bg-gray-800 dark:bg-white shadow-md text-white rounded-full size-7 flex items-center justify-center cursor-pointer z-10 ${
                             (!isDesktopOrLaptop && selectedItem !== item.i) ? "hidden" : "block"
                           } md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100`}
                           onClick={(e) => {
@@ -232,7 +236,7 @@ const GridLayout: React.FC = () => {
                             }
                           }}
                         >
-                          <Icons.upload className="size-3 text-destructive dark:text-white" />
+                          <Icons.upload className="size-4 dark:text-muted " />
                         </button>
                       </TooltipTrigger>
                       <TooltipContent className="md:block hidden">
