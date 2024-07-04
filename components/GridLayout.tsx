@@ -106,8 +106,12 @@ const GridLayout: React.FC = () => {
     <div className="mt-8">
       <GridSettings />
 
-      <div ref={gridStepRef} className="m-1 px-1 md:px-4"
-      style={{paddingBottom:`${(rows * 4) + (gap >= 9 ? gap * 14 : gap * 10)}px`}}
+      <div
+        ref={gridStepRef}
+        className="m-1 px-1 md:px-4"
+        style={{
+          paddingBottom: `${rows * 4 + (gap >= 9 ? gap * 14 : gap * 10)}px`,
+        }}
       >
         <div
           className={`grid-step flex flex-col m-auto z-10 transition-all duration-250 ease-in-out delay-100 
@@ -166,16 +170,20 @@ const GridLayout: React.FC = () => {
                 margin={[gap * 4, gap * 4]}
                 compactType={null}
                 containerPadding={[0, 0]}
-                isDraggable={isDesktopOrLaptop || (selectedItem !== null)}
-                isResizable={isDesktopOrLaptop || (selectedItem !== null)}
+                isDraggable={isDesktopOrLaptop || selectedItem !== null}
+                isResizable={isDesktopOrLaptop || selectedItem !== null}
                 onLayoutChange={(layout) => setLayout(layout)}
               >
                 {updatedLayout.map((item) => (
                   <div
                     key={item.i}
                     onClick={() => handleItemClick(item.i)}
-                    className={`relative text-white bg-primary flex justify-center border border-white items-center  rounded-lg p-3 shadow-lg z-20 cursor-pointer group transition-all duration-250 ease-in-out delay-100
-                      ${ (!isDesktopOrLaptop && selectedItem === item.i) ? "border-2 dark:border-white border-gray-800" : "md:duration-300 md:dark:hover:border-white md:hover:border-gray-800 md:hover:border-[3px]"}
+                    className={`relative text-white bg-primary flex justify-center items-center  rounded-lg p-3 shadow-lg z-20 cursor-pointer group transition-all duration-250 ease-in-out delay-100
+                      ${
+                        !isDesktopOrLaptop && selectedItem === item.i
+                          ? "border-2 dark:border-white border-gray-800"
+                          : "border border-gray-800 dark:border-white md:duration-300 md:dark:hover:border-white md:hover:border-gray-800 md:hover:border-[3px]"
+                      }
                        `}
                   >
                     {images[item.i] &&
@@ -194,10 +202,12 @@ const GridLayout: React.FC = () => {
                       <TooltipTrigger asChild>
                         <button
                           className={`delete-button absolute top-0 md:translate-x-0 translate-x-1/2 md:-translate-y-0 -translate-y-1/2 right-0 m-1 p-1 bg-gray-800 dark:bg-white shadow-md text-white rounded-full size-7 flex items-center justify-center cursor-pointer z-30 
-                            ${ (!isDesktopOrLaptop && selectedItem !== item.i) ? "hidden" : "block"} 
-                            
-                          md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100
-                          `}
+                            ${
+                              !isDesktopOrLaptop && selectedItem !== item.i
+                                ? "hidden"
+                                : "block"
+                            } 
+                            md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100`}
                           onClick={(e) => {
                             e.stopPropagation();
                             handleDeleteItem(item.i);
@@ -219,18 +229,24 @@ const GridLayout: React.FC = () => {
                       <TooltipTrigger asChild>
                         <button
                           className={`upload-button absolute -translate-x-1/2 md:translate-x-0 -translate-y-1/2 md:-translate-y-0 top-0 left-0 m-1 p-1 bg-gray-800 dark:bg-white shadow-md text-white rounded-full size-7 flex items-center justify-center cursor-pointer z-10 ${
-                            (!isDesktopOrLaptop && selectedItem !== item.i) ? "hidden" : "block"
+                            !isDesktopOrLaptop && selectedItem !== item.i
+                              ? "hidden"
+                              : "block"
                           } md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100`}
                           onClick={(e) => {
                             e.stopPropagation();
-                            const inputElement = document.getElementById(`upload-${item.i}`);
+                            const inputElement = document.getElementById(
+                              `upload-${item.i}`
+                            );
                             if (inputElement) {
                               inputElement.click();
                             }
                           }}
                           onTouchEnd={(e) => {
                             e.stopPropagation();
-                            const inputElement = document.getElementById(`upload-${item.i}`);
+                            const inputElement = document.getElementById(
+                              `upload-${item.i}`
+                            );
                             if (inputElement) {
                               inputElement.click();
                             }

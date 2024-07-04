@@ -53,7 +53,18 @@
       --ring: 10 78% 54%;
     }
   }
+
+  .react-grid-item > .react-resizable-handle::after {
+    content: '';
+    width: 10px !important;
+    height: 10px !important;
+    cursor: ew-resize;
+  }
   
+  /* Dark mode */
+.dark .react-grid-item > .react-resizable-handle::after {
+  border-color: white;
+}
   
 
   @layer base {
