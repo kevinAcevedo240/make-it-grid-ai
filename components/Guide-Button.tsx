@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { useTour } from '@reactour/tour'
-import * as Icons from "@/components/icons";
+import * as Icons from "@/components/icons/icons";
 import {
   Tooltip,
   TooltipContent,

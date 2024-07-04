@@ -6,7 +6,7 @@ import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import GridSettings from './GridSettings';
 import { TrashIcon } from "@radix-ui/react-icons";
-import * as Icons from "@/components/icons";
+import * as Icons from "@/components/icons/icons";
 import { GridContext } from '@/context/useGridContext';
 import { useMediaQuery } from 'react-responsive';
 import {

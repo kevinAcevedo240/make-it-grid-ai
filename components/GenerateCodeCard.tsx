@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as Icons from "@/components/icons";
+import * as Icons from "@/components/icons/icons";
 import { Button } from './ui/button';
 import toast from 'react-hot-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';

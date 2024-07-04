@@ -1,4 +1,4 @@
-import * as Icons from "@/components/icons";
+import * as Icons from "@/components/icons/icons";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import React from "react";

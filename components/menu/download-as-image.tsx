@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { toPng } from 'html-to-image';
-import * as Icons from "@/components/icons";
+import * as Icons from "@/components/icons/icons";
 import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";// Import your context
 import { GridContext } from '@/context/useGridContext';
