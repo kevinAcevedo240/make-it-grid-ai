@@ -18,6 +18,8 @@ import {
   Trash2Icon,
   Smartphone,
   InfoIcon,
+  UploadIcon,
+  DownloadIcon,
 } from "lucide-react";
 
 // Brands
@@ -41,6 +43,8 @@ const Dices = DicesIcon;
 const Copy = IconCopy;
 const Mobile = Smartphone;
 const Desktop = IconDeviceDesktop;
+const upload = UploadIcon;
+const Download = DownloadIcon;
 
 export {
   CommandIcon,
@@ -58,4 +62,6 @@ export {
   Desktop,
   Info,
   Codesandbox,
+  upload,
+  Download,
 };

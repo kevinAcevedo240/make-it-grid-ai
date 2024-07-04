@@ -1,3 +1,4 @@
+import { RefObject } from "react";
 
   export interface LayoutItem {
     i: string;
@@ -5,6 +6,7 @@
     y: number;
     w: number;
     h: number;
+    static?: boolean;
 };
 
 
@@ -24,4 +26,7 @@ export interface GridContextType {
   randomizeGrid: () => void;
   ResetGrid: () => void;
   saveToLocalStorage: (mode: 'desktop' | 'mobile', data: any) => void; 
+  gridStepRef: RefObject<HTMLDivElement> | null,
+  images: Record<string, string | ArrayBuffer | null>;  
+  setImages: React.Dispatch<React.SetStateAction<Record<string, string | ArrayBuffer | null>>>;  
 }

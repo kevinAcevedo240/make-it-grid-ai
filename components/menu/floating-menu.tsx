@@ -10,6 +10,7 @@ import { ResponsiveToggle } from "./responsive-toggle";
 import { Website } from "./web";
 import CopyCode from "./copy-code";
 import BuyMeCoffee from "./buy-me-coffee";
+import DownloadAsImage from "./download-as-image";
 
 
 const Menu = () => {
@@ -20,6 +21,7 @@ const Menu = () => {
           <CopyCode />
           <Reset />
           <Random />
+          <DownloadAsImage/>
           <div>
             <Separator orientation="vertical" />
             <ResponsiveToggle />

@@ -24,6 +24,9 @@ export const GridContext = createContext<GridContextType>({
   ResetGrid: () => {},
   setIsMobile: () => {},
   saveToLocalStorage: () => {},
+  gridStepRef: null,
+  images: {},  
+  setImages: () => {},  
 });
 
 export const GridProvider = ({ children }: GridProviderProps) => {

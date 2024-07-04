@@ -1,5 +1,5 @@
 import { LayoutItem } from '@/types';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 
 // Default values for the grid
 const defaultRows = 3;
@@ -13,6 +13,8 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
   const [cols, setCols] = useState<number>(defaultCols);
   const [gap, setGap] = useState(defaultGap);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const gridStepRef = useRef<HTMLDivElement>(null); 
+  const [images, setImages] = useState<Record<string, string | ArrayBuffer | null>>({});
 
   // Save layout to local storage base on the selected Mode
   const saveToLocalStorage = useCallback((mode: 'desktop' | 'mobile', data: any) => {
@@ -203,6 +205,7 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     setRows(defaultRows);
     setCols(defaultCols);
     setGap(defaultGap);
+    setImages({});
     saveToLocalStorage('desktop', defaultData);
     saveToLocalStorage('mobile', defaultData);
   }, [saveToLocalStorage]);
@@ -226,6 +229,9 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     ResetGrid,
     saveToLocalStorage,
     loadFromLocalStorage,
+    gridStepRef,
+    setImages,
+    images,
   };
 };
 

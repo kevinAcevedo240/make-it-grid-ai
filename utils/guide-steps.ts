@@ -22,6 +22,10 @@ export const steps = [
     selector: '.random-step',
     content: 'Generate random grid configurations for experimentation 🎲',
   },
+  {
+    selector: '.download-step',
+    content: 'You can download the generated Grid as Image 🖼️',
+  },
     {
       selector: '.responsive-step',
       content: 'Preview how the grid layout responds between mobile and desktop size and make your grid responsive!',
