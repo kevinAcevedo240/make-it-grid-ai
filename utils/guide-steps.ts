@@ -8,7 +8,7 @@ export const steps = [
   },
   {
     selector: '.grid-step',
-    content: 'Modify the grid layout by clicking on cells to resize and move items 🤯',
+    content: 'Modify the grid layout by clicking on cells to resize and move items. You can also add images to each item to customize it! 🤯',
   },
   {
     selector: '.copy-step',
