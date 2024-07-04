@@ -1,21 +1,18 @@
 'use client'
 
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import GridSettings from './GridSettings';
-import { TrashIcon } from "@radix-ui/react-icons";
-import * as Icons from "@/components/icons/icons";
 import { GridContext } from '@/context/useGridContext';
 import { useMediaQuery } from 'react-responsive';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import Image from 'next/image';
+import EmptyItem from './EmptyItem';
+import UploadImage from './UploadImageItem';
+import DeleteItem from './DeleteItem';
 
+// Wrap ResponsiveGridLayout with WidthProvider for better handling of dynamic widths
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const GridLayout: React.FC = () => {
@@ -35,8 +32,10 @@ const GridLayout: React.FC = () => {
 
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
+  // Determine if the device is a desktop or laptop using media query
   const isDesktopOrLaptop = useMediaQuery({ minWidth: 768 });
 
+  // Breakpoints and responsive column configuration
   const breakpoints = { lg: 1200, md: 960, sm: 720, xs: 480, xxs: 0 };
   const colsResponsive = {
     lg: Math.max(cols, 1),
@@ -46,13 +45,13 @@ const GridLayout: React.FC = () => {
     xxs: Math.max(cols, 1)
   };
 
-  // Actualiza los elementos del layout para que sean estáticos si no es escritorio/portátil
+  // Update layout items to be static if the device is not desktop/laptop and the item is not selected
   const updatedLayout = layout.map(item => ({
     ...item,
     static: !isDesktopOrLaptop && selectedItem !== item.i
   }));
 
-  // Agrega un efecto para manejar la deselección al hacer clic fuera
+  // Handle click outside the grid to deselect items
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (gridStepRef?.current && !gridStepRef.current.contains(event.target as Node)) {
@@ -66,6 +65,7 @@ const GridLayout: React.FC = () => {
     };
   }, [gridStepRef]);
 
+  // Handle image upload and convert the uploaded image to base64
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, itemId: string) => {
     const file = e.target.files && e.target.files[0];
     if (file) {
@@ -80,6 +80,7 @@ const GridLayout: React.FC = () => {
     }
   };
 
+  // Handle item deletion and remove associated image
   const handleDeleteItem = (itemId: string) => {
     deleteItem(itemId);
     setImages((prevImages) => {
@@ -89,7 +90,7 @@ const GridLayout: React.FC = () => {
     });
   };
 
-  // Actualiza la función de manejo de clics en los ítems
+  // Handle item click for selection in mobile view
   const handleItemClick = (itemId: string) => {
     if (!isDesktopOrLaptop) {
       setSelectedItem(itemId);
@@ -99,7 +100,6 @@ const GridLayout: React.FC = () => {
   return (
     <div className="mt-8">
       <GridSettings />
-
       <div
         ref={gridStepRef}
         className="m-1 px-1 md:px-4"
@@ -129,26 +129,20 @@ const GridLayout: React.FC = () => {
                   padding: `${gap * 4}px 0`,
                 }}
               >
+                {/* Render empty items for grid slots */}
                 {Array.from({ length: rows * cols }).map((_, index) => {
                   const x = index % cols;
                   const y = Math.floor(index / cols);
                   return (
-                    <div
+                    <EmptyItem
                       key={index}
-                      onClick={() => addItem(x, y)}
-                      className="empty-item relative border border-muted-foreground/30 dark:border-gray-100 transition-all duration-300 hover:bg-secondary/30 rounded-lg h-full flex items-center justify-center z-0 cursor-pointer"
-                      style={{ zIndex: 1 }}
-                    >
-                      <div
-                        className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-white rounded-full ${
-                          (isMobile || !isDesktopOrLaptop) && cols >= 8
-                            ? "size-5"
-                            : "size-6 sm:size-8"
-                        } flex items-center justify-center  z-1`}
-                      >
-                        <span className="text-xl sm:text-2xl">+</span>
-                      </div>
-                    </div>
+                      x={x}
+                      y={y}
+                      addItem={addItem}
+                      isDesktopOrLaptop={isDesktopOrLaptop}
+                      isMobile={isMobile}
+                      cols={cols}
+                    />
                   );
                 })}
               </div>
@@ -166,8 +160,9 @@ const GridLayout: React.FC = () => {
                 containerPadding={[0, 0]}
                 isDraggable={isDesktopOrLaptop || selectedItem !== null}
                 isResizable={isDesktopOrLaptop || selectedItem !== null}
-                onLayoutChange={(layout) => setLayout(layout)}
+                onLayoutChange={(updatedLayout) => setLayout(updatedLayout)}
               >
+                {/* Render each grid item with its respective image, delete, and upload buttons */}
                 {updatedLayout.map((item) => (
                   <div
                     key={item.i}
@@ -192,85 +187,20 @@ const GridLayout: React.FC = () => {
                         />
                       )}
 
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button
-                          className={`delete-button absolute top-0  translate-x-1/2 -translate-y-1/2 right-0 m-1 p-1 bg-gray-800 dark:bg-white shadow-md text-white rounded-full size-7 flex items-center justify-center cursor-pointer z-30 
-                            ${
-                              isMobile
-                                ? "translate-x-1/2 -translate-y-1/2"
-                                : " md:-translate-y-0 md:translate-x-0"
-                            }
-                            ${
-                              !isDesktopOrLaptop && selectedItem !== item.i
-                                ? "hidden"
-                                : "block"
-                            } 
-                            md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeleteItem(item.i);
-                          }}
-                          onTouchEnd={(e) => {
-                            e.stopPropagation();
-                            handleDeleteItem(item.i);
-                          }}
-                        >
-                          <TrashIcon className="size-5 dark:text-destructive " />
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent className="md:block hidden">
-                        Delete
-                      </TooltipContent>
-                    </Tooltip>
+                    <DeleteItem
+                      itemId={item.i}
+                      handleDeleteItem={handleDeleteItem}
+                      isMobile={isMobile}
+                      isDesktopOrLaptop={isDesktopOrLaptop}
+                      selectedItem={selectedItem}
+                    />
 
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button
-                          className={`upload-button absolute -translate-x-1/2 -translate-y-1/2 top-0 left-0 m-1 p-1 bg-gray-800 dark:bg-white shadow-md text-white rounded-full size-7 flex items-center justify-center cursor-pointer z-10 
-                             ${
-                               isMobile
-                                 ? "-translate-x-1/2 -translate-y-1/2"
-                                 : " md:-translate-y-0 md:translate-x-0"
-                             }
-                            ${
-                              !isDesktopOrLaptop && selectedItem !== item.i
-                                ? "hidden"
-                                : "block"
-                            } md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100`}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            const inputElement = document.getElementById(
-                              `upload-${item.i}`
-                            );
-                            if (inputElement) {
-                              inputElement.click();
-                            }
-                          }}
-                          onTouchEnd={(e) => {
-                            e.stopPropagation();
-                            const inputElement = document.getElementById(
-                              `upload-${item.i}`
-                            );
-                            if (inputElement) {
-                              inputElement.click();
-                            }
-                          }}
-                        >
-                          <Icons.upload className="size-4 dark:text-muted " />
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent className="md:block hidden">
-                        Upload Image
-                      </TooltipContent>
-                    </Tooltip>
-
-                    <input
-                      type="file"
-                      id={`upload-${item.i}`}
-                      style={{ display: "none" }}
-                      accept="image/*"
-                      onChange={(e) => handleImageChange(e, item.i)}
+                    <UploadImage
+                      itemId={item.i}
+                      handleImageChange={handleImageChange}
+                      isMobile={isMobile}
+                      isDesktopOrLaptop={isDesktopOrLaptop}
+                      selectedItem={selectedItem}
                     />
 
                     <div className="relative z-10 item-id">{item.i}</div>

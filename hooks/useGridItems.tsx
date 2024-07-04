@@ -87,6 +87,7 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
 
   // Add a new item to the layout
   const addItem = useCallback((x: number, y: number) => {
+    console.log('addItem', x, y);
     const currentLength = layout.length;
     const newItemKey = `${currentLength}`;
 
