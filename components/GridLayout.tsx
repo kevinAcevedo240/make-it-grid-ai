@@ -178,7 +178,7 @@ const GridLayout: React.FC = () => {
                   <div
                     key={item.i}
                     onClick={() => handleItemClick(item.i)}
-                    className={`relative text-white bg-primary flex justify-center items-center  rounded-lg p-3 shadow-lg z-20 cursor-pointer group transition-all duration-250 ease-in-out delay-100
+                    className={`relative text-white bg-primary flex justify-center items-center  rounded-lg p-3 shadow-lg z-20 cursor-grab active:cursor-grabbing group transition-all duration-250 ease-in-out delay-100
                       ${
                         !isDesktopOrLaptop && selectedItem === item.i
                           ? "border-2 dark:border-white border-gray-800"
