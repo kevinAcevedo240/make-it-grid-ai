@@ -92,13 +92,7 @@ const GridLayout: React.FC = () => {
   // Actualiza la función de manejo de clics en los ítems
   const handleItemClick = (itemId: string) => {
     if (!isDesktopOrLaptop) {
-      console.log("item seleccionado: ", itemId);
-      setSelectedItem(prevSelectedItem => {
-        if (prevSelectedItem === itemId) {
-          return null; // Si el ítem ya está seleccionado, deselecciónalo
-        }
-        return itemId; // Selecciona el nuevo ítem
-      });
+      setSelectedItem(itemId);
     }
   };
 
@@ -201,7 +195,12 @@ const GridLayout: React.FC = () => {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <button
-                          className={`delete-button absolute top-0 md:translate-x-0 translate-x-1/2 md:-translate-y-0 -translate-y-1/2 right-0 m-1 p-1 bg-gray-800 dark:bg-white shadow-md text-white rounded-full size-7 flex items-center justify-center cursor-pointer z-30 
+                          className={`delete-button absolute top-0  translate-x-1/2 -translate-y-1/2 right-0 m-1 p-1 bg-gray-800 dark:bg-white shadow-md text-white rounded-full size-7 flex items-center justify-center cursor-pointer z-30 
+                            ${
+                              isMobile
+                                ? "translate-x-1/2 -translate-y-1/2"
+                                : " md:-translate-y-0 md:translate-x-0"
+                            }
                             ${
                               !isDesktopOrLaptop && selectedItem !== item.i
                                 ? "hidden"
@@ -228,11 +227,17 @@ const GridLayout: React.FC = () => {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <button
-                          className={`upload-button absolute -translate-x-1/2 md:translate-x-0 -translate-y-1/2 md:-translate-y-0 top-0 left-0 m-1 p-1 bg-gray-800 dark:bg-white shadow-md text-white rounded-full size-7 flex items-center justify-center cursor-pointer z-10 ${
-                            !isDesktopOrLaptop && selectedItem !== item.i
-                              ? "hidden"
-                              : "block"
-                          } md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100`}
+                          className={`upload-button absolute -translate-x-1/2 -translate-y-1/2 top-0 left-0 m-1 p-1 bg-gray-800 dark:bg-white shadow-md text-white rounded-full size-7 flex items-center justify-center cursor-pointer z-10 
+                             ${
+                               isMobile
+                                 ? "-translate-x-1/2 -translate-y-1/2"
+                                 : " md:-translate-y-0 md:translate-x-0"
+                             }
+                            ${
+                              !isDesktopOrLaptop && selectedItem !== item.i
+                                ? "hidden"
+                                : "block"
+                            } md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100`}
                           onClick={(e) => {
                             e.stopPropagation();
                             const inputElement = document.getElementById(
