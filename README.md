@@ -55,6 +55,11 @@
 
 🔎 **SEO and Performance Optimization**: The project is SEO-friendly and performs efficiently, validated with high scores on PageSpeed Insights for optimal user experience.
 
+🖼️ **Customizable Items**: Personalize each grid item by adding and customizing images to make your grid truly unique.
+
+📸 **Download Grid as Image**: Capture and download your entire grid layout as an image for easy sharing and integration into other projects.
+
+
 <br/>
 
 [![PageSpeedInsigth.png](https://i.postimg.cc/kgkj9XRT/image-2.png)](https://pagespeed.web.dev/analysis/https-www-makeitgrid-com/pwu96eaa2i?form_factor=desktop)
