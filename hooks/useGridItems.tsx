@@ -79,14 +79,14 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     // saveToLocalStorage(mode, { rows, cols, gap, layout });
   }, [loadFromLocalStorage, isMobile]);
   
-  // Load layout from local storage when isMobile changes
+  // Load layout from local storage when rows, cols, gap, or isMobile changes
   useEffect(() => {
     const mode = isMobile ? 'mobile' : 'desktop';
     loadFromLocalStorageLayout(mode);
     // saveToLocalStorage(mode, { rows, cols, gap, layout });
   }, [rows,cols,gap, isMobile]);
 
-  // Save the layout to local storage when the layout changes
+  // Save the layout to local storage whenever there is a change in the layout, rows, cols, gap, or isMobile
    useEffect(() => {
      saveToLocalStorage(isMobile ? 'mobile' : 'desktop', { rows, cols, gap, layout });
    }, [layout, rows, cols, gap, saveToLocalStorage]);
