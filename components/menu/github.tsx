@@ -19,7 +19,6 @@ export const GitHub = () => {
           className="github-step dark:border-primary bg-muted-foreground dark:border dark:bg-transparent active:scale-90"
         >
           <Icons.GitHub className="size-5 text-white" />
-          <span className="sr-only">GitHub</span>
         </Button>
       </TooltipTrigger>
       <TooltipContent className="md:block hidden text-center">
