@@ -29,4 +29,6 @@ export interface GridContextType {
   gridStepRef: RefObject<HTMLDivElement> | null,
   images: Record<string, string | ArrayBuffer | null>;  
   setImages: React.Dispatch<React.SetStateAction<Record<string, string | ArrayBuffer | null>>>;  
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }

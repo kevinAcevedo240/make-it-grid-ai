@@ -27,6 +27,8 @@ export const GridContext = createContext<GridContextType>({
   gridStepRef: null,
   images: {},  
   setImages: () => {},  
+  loading: false,
+  setLoading: () => {},
 });
 
 export const GridProvider = ({ children }: GridProviderProps) => {

@@ -15,6 +15,7 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const gridStepRef = useRef<HTMLDivElement>(null); 
   const [images, setImages] = useState<Record<string, string | ArrayBuffer | null>>({});
+  const [loading, setLoading] = useState(false);
 
   // Save layout to local storage base on the selected Mode
   const saveToLocalStorage = useCallback((mode: 'desktop' | 'mobile', data: any) => {
@@ -240,6 +241,8 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
     gridStepRef,
     setImages,
     images,
+    loading,
+    setLoading,
   };
 };
 
