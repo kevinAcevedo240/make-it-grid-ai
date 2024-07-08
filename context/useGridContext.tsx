@@ -14,7 +14,7 @@ export const GridContext = createContext<GridContextType>({
   layout: [],
   gap: 0,
   isMobile: false,
-  addItem: () => {},
+  addItem: () => '',
   deleteItem: () => {},
   setLayout: () => {},
   setRows: () => {},

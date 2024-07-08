@@ -16,7 +16,7 @@ export interface GridContextType {
   layout: LayoutItem[];
   gap: number;
   isMobile: boolean;
-  addItem: (x: number, y: number) => void;
+  addItem: (x: number, y: number) => string;
   deleteItem: (id: string) => void;
   setLayout: React.Dispatch<React.SetStateAction<LayoutItem[]>>;
   setRows: React.Dispatch<React.SetStateAction<number>>;

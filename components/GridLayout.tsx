@@ -97,6 +97,16 @@ const GridLayout: React.FC = () => {
     }
   };
 
+  //Handle item click for selection in mobile view when add a new item
+  const handleAddItemClick = (x: number, y: number) => {
+    return () => {
+      const newItemId = addItem(x, y);
+      if (!isDesktopOrLaptop) {
+        setSelectedItem(newItemId);
+      }
+    };
+  };
+
   return (
     <div className="mt-8">
       <GridSettings />
@@ -138,7 +148,7 @@ const GridLayout: React.FC = () => {
                       key={index}
                       x={x}
                       y={y}
-                      addItem={addItem}
+                      addItem={handleAddItemClick(x, y)}
                       isDesktopOrLaptop={isDesktopOrLaptop}
                       isMobile={isMobile}
                       cols={cols}

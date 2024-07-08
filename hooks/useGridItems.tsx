@@ -95,7 +95,6 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
 
   // Add a new item to the layout
   const addItem = useCallback((x: number, y: number) => {
-    console.log('addItem', x, y);
     const currentLength = layout.length;
     const newItemKey = `${currentLength}`;
 
@@ -125,6 +124,7 @@ const useGridItems = (initialLayout: LayoutItem[] = []) => {
       setLayout([...updatedLayout, newItem]);
       saveToLocalStorage(isMobile ? 'mobile' : 'desktop', { rows, cols, gap, layout: [...updatedLayout, newItem] });
     }
+    return newItemKey;
   }, [layout, rows, cols, gap, saveToLocalStorage, isMobile]);
 
   // Delete the item from the layout
