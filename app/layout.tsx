@@ -16,7 +16,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "MakeItGrid | Bento Grid Generator",
   description:
-    "Empower your creativity with MakeItGrid, the ultimate platform for crafting customizable bento grids, Tailwind and HTML/CSS grids Generator.",
+    "Empower your creativity with MakeItGrid, the ultimate platform for crafting customizable bento grids, Tailwind and HTML/CSS bento grids Generator.",
   authors: {
     name: "Kevin Acevedo",
   },
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MakeItGrid | Bento Grid Generator",
     description:
-      "Empower your creativity with MakeItGrid, the best platform for crafting customizable bento grids, Tailwind and HTML/CSS grids Generator.",
+      "Empower your creativity with MakeItGrid, the best platform for crafting customizable bento grids, Tailwind and HTML/CSS bento grids Generator.",
     url: "https://www.makeitgrid.com/",
     type: "website",
     images: [
