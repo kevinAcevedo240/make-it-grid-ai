@@ -15,8 +15,13 @@ export function ModeToggle() {
   }, [theme, setTheme])
 
   const toggleTheme = () => {
+    const rootElement = document.documentElement;
     if (!document.startViewTransition) {
-      switchTheme()
+      rootElement.classList.add('theme-transition');
+      switchTheme();
+      setTimeout(() => {
+        rootElement.classList.remove('theme-transition');
+      }, 1000); // Duración de la animación en milisegundos
     } else {
       document.startViewTransition(switchTheme)
     }
@@ -30,6 +35,7 @@ export function ModeToggle() {
       setTheme('light') // O cualquier valor por defecto que desees
     }
   }, [theme, setTheme])
+
   return (
     <Button onClick={toggleTheme} variant="ghost" size="sm" className="size-10 px-0 active:scale-90 z-10">
       {theme === "light" ? (

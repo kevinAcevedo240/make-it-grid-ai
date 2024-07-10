@@ -15,6 +15,10 @@
   .dark::view-transition-new(root) {
     animation-name: reveal-dark;
   }
+
+  :root.theme-transition {
+    transition: background-color 1s, color 1s;
+  }
   
   @keyframes reveal-dark {
     from {
