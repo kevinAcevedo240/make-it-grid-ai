@@ -20,6 +20,8 @@ import {
   InfoIcon,
   UploadIcon,
   DownloadIcon,
+  ChevronUp,
+  ChevronDown,
 } from "lucide-react";
 
 // Brands
@@ -36,6 +38,8 @@ const System = ComputerIcon;
 const Globe = GlobeIcon;
 const Trash = Trash2Icon;
 const Info = InfoIcon;
+const ChevronUpIcon = ChevronUp;
+const ChevronDownIcon = ChevronDown;
 
 // Functions - settings
 const Reset = RotateCcwIcon;
@@ -64,4 +68,6 @@ export {
   Codesandbox,
   upload,
   Download,
+  ChevronUpIcon,
+  ChevronDownIcon,
 };
