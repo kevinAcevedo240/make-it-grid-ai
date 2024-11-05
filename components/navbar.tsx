@@ -1,3 +1,4 @@
+import FeedbackButton from './Feedback-Button';
 import GuideButton from './Guide-Button';
 import { ModeToggle } from './ui/theme-toggle';
 
@@ -9,6 +10,7 @@ const NavBar = () => {
       </h1>
       <div className="flex justify-center items-center gap-3">
         <GuideButton />
+        <FeedbackButton />
         <ModeToggle />
       </div>
     </div>

@@ -22,6 +22,7 @@ import {
   DownloadIcon,
   ChevronUp,
   ChevronDown,
+  ClipboardPenIcon,
 } from "lucide-react";
 
 // Brands
@@ -40,6 +41,7 @@ const Trash = Trash2Icon;
 const Info = InfoIcon;
 const ChevronUpIcon = ChevronUp;
 const ChevronDownIcon = ChevronDown;
+const ClipboardPen = ClipboardPenIcon;
 
 // Functions - settings
 const Reset = RotateCcwIcon;
@@ -70,4 +72,5 @@ export {
   Download,
   ChevronUpIcon,
   ChevronDownIcon,
+  ClipboardPen,
 };
