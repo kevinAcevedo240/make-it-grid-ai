@@ -31,7 +31,7 @@
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
-[![My Skills](https://skillicons.dev/icons?i=tailwind,typescript,react,nextjs,prisma)](https://skillicons.dev)<br/>
+[![My Skills](https://skillicons.dev/icons?i=tailwind,typescript,react,nextjs)](https://skillicons.dev)<br/>
 
 ## <a name="features">🔋 Features</a>
 
