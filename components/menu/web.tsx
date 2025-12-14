@@ -8,7 +8,7 @@ import {
 
 export const Website = () => {
   const handleClick = () => {
-    window.open("https://www.kevin-acevedo.dev/", "_blank");
+    window.open("https://www.cliclab.studio/", "_blank");
   };
 
   return (
@@ -23,7 +23,7 @@ export const Website = () => {
         </Button>
       </TooltipTrigger>
       <TooltipContent className="md:block hidden">
-        Visit my Website
+       Interested in a website?
       </TooltipContent>
     </Tooltip>
   );
